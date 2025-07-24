@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staci's Backyard Leveling Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9fafb; /* A fallback color */
+        }
+
+        /* --- Background Image Logic --- */
+        /* For Desktop: A fixed background image on the body */
+        @media (min-width: 1024px) { /* lg breakpoint in Tailwind */
+            body {
+                background-image: url('https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?auto=format&fit=crop&q=80');
+                background-size: cover;
+                background-position: center;
+                background-attachment: fixed;
+            }
+        }
+        
+        /* For Mobile/Tablet: A scrolling background on the main container */
+        @media (max-width: 1023px) {
+            .content-wrapper {
+                background-image: url('https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?auto=format&fit=crop&q=80');
+                background-size: cover;
+                background-position: center;
+            }
+        }
+
+        .step-card {
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            display: flex;
+            flex-direction: column;
+        }
+        .step-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        details > summary {
+            list-style: none;
+        }
+        details > summary::-webkit-details-marker {
+            display: none;
+        }
+        .card-content {
+            flex-grow: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- On desktop, this has a transparent background. On mobile, it gets the background image. -->
+    <div class="content-wrapper bg-gray-50/95 lg:bg-transparent min-h-screen">
+        <div class="container mx-auto p-4 sm:p-6 lg:p-8">
+            <!-- Header -->
+            <header class="text-center mb-10">
+                <h1 class="text-4xl sm:text-5xl font-bold text-emerald-700">Staci's Backyard Leveling Guide</h1>
+                <p class="text-lg text-gray-600 mt-4 max-w-2xl mx-auto">Staci, it's completely normal to feel overwhelmed by a big project like this. But we're going to break it down into simple, manageable steps. You've totally got this!</p>
+            </header>
+
+            <main>
+                <!-- Step-by-Step Guide -->
+                <section id="steps">
+                    <h2 class="text-3xl font-bold text-center mb-8 text-gray-700">The 7 Steps to a Perfectly Level Yard</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                        <!-- Step 1: Plan & Prepare -->
+                        <div class="step-card bg-white p-6 rounded-xl shadow-md">
+                            <div class="card-content">
+                                <div class="flex items-center mb-4">
+                                    <div class="bg-emerald-100 text-emerald-700 rounded-full h-12 w-12 flex items-center justify-center font-bold text-xl flex-shrink-0">1</div>
+                                    <h3 class="text-xl font-semibold ml-4">Plan & Prepare</h3>
+                                </div>
+                                <p class="text-gray-600">First, clear the area of all debris, rocks, and existing vegetation. Check for any utility lines before you dig! Mark out the project area with stakes and string.</p>
+                                <em class="text-sm text-emerald-600 block mt-2">Helpful Tip: Call 811 before you dig to have utility lines marked for free. Safety first!</em>
+                            </div>
+                            <div class="mt-4 pt-4 border-t border-gray-200 flex justify-around text-sm">
+                                <a href="https://www.youtube.com/watch?v=1oyQQvLyRgc" target="_blank" class="flex items-center text-emerald-600 hover:text-emerald-800 font-medium">
+                                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
+                                    Watch Tutorial
+                                </a>
+                                <a href="https://www.thisoldhouse.com/lawns/yard-grading" target="_blank" class="flex items-center text-emerald-600 hover:text-emerald-800 font-medium">
+                                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path><path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.03 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"></path></svg>
+                                    Read More
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Step 2: Map Your Slope -->
+                        <div class="step-card bg-white p-6 rounded-xl shadow-md">
+                            <div class="card-content">
+                                <div class="flex items-center mb-4">
+                                    <div class="bg-emerald-100 text-emerald-700 rounded-full h-12 w-12 flex items-center justify-center font-bold text-xl flex-shrink-0">2</div>
+                                    <h3 class="text-xl font-semibold ml-4">Map Your Slope</h3>
+                                </div>
+                                <p class="text-gray-600">Hammer wooden stakes into the ground in a grid pattern across your work area (about 10 feet apart). These will be your reference points for leveling.</p>
+                            </div>
+                            <div class="mt-4 pt-4 border-t border-gray-200 flex justify-around text-sm">
+                                <a href="https://www.youtube.com/watch?v=3SkhJQrttSw" target="_blank" class="flex items-center text-emerald-600 hover:text-emerald-800 font-medium">
+                                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
+                                    Watch Tutorial
+                                </a>
+                                <a href="https://www.bobvila.com/articles/how-to-level-a-yard/" target="_blank" class="flex items-center text-emerald-600 hover:text-emerald-800 font-medium">
+                                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path><path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.03 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"></path></svg>
+                                    Read More
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Step 3: Find Your Level -->
+                        <div class="step-card bg-white p-6 rounded-xl shadow-md">
+                            <div class="card-content">
+                                <div class="flex items-center mb-4">
+                                    <div class="bg-emerald-100 text-emerald-700 rounded-full h-12 w-12 flex items-center justify-center font-bold text-xl flex-shrink-0">3</div>
+                                    <h3 class="text-xl font-semibold ml-4">Find Your Level</h3>
+                                </div>
+                                <p class="text-gray-600">Tie a string to a stake in a high area. Use a line level to get the string perfectly level, then attach it to the next stake. Mark the level line on each stake. Repeat for the entire grid.</p>
+                                <em class="text-sm text-emerald-600 block mt-2">You're doing great! This step is key to getting a professional-looking result.</em>
+                            </div>
+                            <div class="mt-4 pt-4 border-t border-gray-200 flex justify-around text-sm">
+                                <a href="https://www.youtube.com/watch?v=ugKkVvzCxlw" target="_blank" class="flex items-center text-emerald-600 hover:text-emerald-800 font-medium">
+                                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
+                                    Watch Tutorial
+                                </a>
+                                <a href="https://www.wikihow.com/Level-Your-Yard" target="_blank" class="flex items-center text-emerald-600 hover:text-emerald-800 font-medium">
+                                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path><path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.03 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"></path></svg>
+                                    Read More
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Step 4: Remove High Spots -->
+                        <div class="step-card bg-white p-6 rounded-xl shadow-md">
+                            <div class="card-content">
+                                <div class="flex items-center mb-4">
+                                    <div class="bg-emerald-100 text-emerald-700 rounded-full h-12 w-12 flex items-center justify-center font-bold text-xl flex-shrink-0">4</div>
+                                    <h3 class="text-xl font-semibold ml-4">Remove High Spots</h3>
+                                </div>
+                                <p class="text-gray-600">Using your marked stakes as a guide, use a shovel or tiller to remove soil from the high spots. Move this soil to the low spots or remove it from the yard.</p>
+                            </div>
+                            <div class="mt-4 pt-4 border-t border-gray-200 flex justify-around text-sm">
+                                <a href="https://www.youtube.com/watch?v=WRwsvtQL7hQ" target="_blank" class="flex items-center text-emerald-600 hover:text-emerald-800 font-medium">
+                                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
+                                    Watch Tutorial
+                                </a>
+                                <a href="https://www.thespruce.com/level-your-lawn-out-by-topdressing-2132666" target="_blank" class="flex items-center text-emerald-600 hover:text-emerald-800 font-medium">
+                                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path><path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.03 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"></path></svg>
+                                    Read More
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Step 5: Fill Low Spots -->
+                        <div class="step-card bg-white p-6 rounded-xl shadow-md">
+                            <div class="card-content">
+                                <div class="flex items-center mb-4">
+                                    <div class="bg-emerald-100 text-emerald-700 rounded-full h-12 w-12 flex items-center justify-center font-bold text-xl flex-shrink-0">5</div>
+                                    <h3 class="text-xl font-semibold ml-4">Fill Low Spots</h3>
+                                </div>
+                                <p class="text-gray-600">Add topsoil to the low-lying areas. A good mix is 60% sand, 40% topsoil. Add soil in layers, lightly tamping it down as you go to prevent major settling.</p>
+                                <em class="text-sm text-emerald-600 block mt-2">Staci's Tip: If you have clay-heavy soil, mixing in some compost along with the sand will really improve drainage.</em>
+                            </div>
+                            <div class="mt-4 pt-4 border-t border-gray-200 flex justify-around text-sm">
+                                <a href="https://www.youtube.com/shorts/O0wuHGPgrzY" target="_blank" class="flex items-center text-emerald-600 hover:text-emerald-800 font-medium">
+                                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
+                                    Watch Tutorial
+                                </a>
+                                <a href="https://www.homedepot.com/c/ah/how-to-level-a-yard/9ba683603be9fa5395fab90197381821" target="_blank" class="flex items-center text-emerald-600 hover:text-emerald-800 font-medium">
+                                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path><path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.03 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"></path></svg>
+                                    Read More
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Step 6: Rake & Grade -->
+                        <div class="step-card bg-white p-6 rounded-xl shadow-md">
+                            <div class="card-content">
+                                <div class="flex items-center mb-4">
+                                    <div class="bg-emerald-100 text-emerald-700 rounded-full h-12 w-12 flex items-center justify-center font-bold text-xl flex-shrink-0">6</div>
+                                    <h3 class="text-xl font-semibold ml-4">Rake & Grade</h3>
+                                </div>
+                                <p class="text-gray-600">Use a large landscape rake to smooth the entire surface. Use the back of the rake to create a final, even grade. Eyeball it from different angles to check for consistency.</p>
+                            </div>
+                            <div class="mt-4 pt-4 border-t border-gray-200 flex justify-around text-sm">
+                                <a href="https://www.youtube.com/watch?v=qaPwUXlhYXY" target="_blank" class="flex items-center text-emerald-600 hover:text-emerald-800 font-medium">
+                                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
+                                    Watch Tutorial
+                                </a>
+                                <a href="https://www.lowes.com/n/how-to/how-to-level-a-yard" target="_blank" class="flex items-center text-emerald-600 hover:text-emerald-800 font-medium">
+                                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path><path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.03 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"></path></svg>
+                                    Read More
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- Step 7: Water & Settle -->
+                        <div class="step-card bg-white p-6 rounded-xl shadow-md md:col-span-2 lg:col-span-1">
+                            <div class="card-content">
+                                <div class="flex items-center mb-4">
+                                    <div class="bg-emerald-100 text-emerald-700 rounded-full h-12 w-12 flex items-center justify-center font-bold text-xl flex-shrink-0">7</div>
+                                    <h3 class="text-xl font-semibold ml-4">Water & Settle</h3>
+                                </div>
+                                <p class="text-gray-600">Lightly water the entire area. This helps the soil settle. You may notice new low spots appear. Fill them in, re-rake, and let the area dry before planting grass or landscaping.</p>
+                                <em class="text-sm text-emerald-600 block mt-2">Almost there! This final step ensures your hard work pays off with a perfectly settled lawn.</em>
+                            </div>
+                            <div class="mt-4 pt-4 border-t border-gray-200 flex justify-around text-sm">
+                                <a href="https://www.youtube.com/watch?v=QJGGDEvuYRY" target="_blank" class="flex items-center text-emerald-600 hover:text-emerald-800 font-medium">
+                                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
+                                    Watch Tutorial
+                                </a>
+                                <a href="https://www.pennington.com/all-products/grass-seed/resources/how-to-plant-grass-seed-on-slopes-and-hills" target="_blank" class="flex items-center text-emerald-600 hover:text-emerald-800 font-medium">
+                                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path><path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.03 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"></path></svg>
+                                    Read More
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Materials & Tools Section -->
+                <section id="materials" class="mt-16">
+                     <div class="bg-white p-8 rounded-xl shadow-md max-w-4xl mx-auto">
+                        <h2 class="text-3xl font-bold text-center mb-6 text-gray-700">Materials & Tools Checklist</h2>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4 text-gray-600">
+                            <ul class="list-disc list-inside space-y-2">
+                                <li>Wooden Stakes</li>
+                                <li>String or Twine</li>
+                                <li>Line Level</li>
+                                <li>Tape Measure</li>
+                                <li>Shovel</li>
+                                <li>Wheelbarrow</li>
+                            </ul>
+                            <ul class="list-disc list-inside space-y-2">
+                                <li>Landscape Rake</li>
+                                <li>Garden Tiller (optional, for large areas)</li>
+                                <li>Topsoil/Sand Mixture</li>
+                                <li>Work Gloves</li>
+                                <li>Marking Paint or Tape</li>
+                                <li>Lawn Roller (optional)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- FAQ Section -->
+                <section id="faq" class="mt-16 max-w-4xl mx-auto">
+                    <h2 class="text-3xl font-bold text-center mb-8 text-gray-700">Frequently Asked Questions</h2>
+                    <p class="text-center text-gray-600 -mt-4 mb-8">Here are a few common questions that might pop up. You're not alone in wondering!</p>
+                    <div class="space-y-4">
+                        <details class="bg-white p-6 rounded-lg shadow-sm group">
+                            <summary class="font-semibold text-lg cursor-pointer flex justify-between items-center">
+                                How do I ensure proper drainage?
+                                <span class="transform transition-transform duration-200 group-open:rotate-45">+</span>
+                            </summary>
+                            <p class="text-gray-600 mt-4">For proper drainage, you should create a very slight slope (about 1-2%) away from your house foundation. This means for every 100 feet of distance, the ground should drop by 1-2 feet. You can achieve this by adjusting your string lines accordingly.</p>
+                        </details>
+                        <details class="bg-white p-6 rounded-lg shadow-sm group">
+                            <summary class="font-semibold text-lg cursor-pointer flex justify-between items-center">
+                                Do I need to rent any heavy equipment?
+                                <span class="transform transition-transform duration-200 group-open:rotate-45">+</span>
+                            </summary>
+                            <p class="text-gray-600 mt-4">For very large or severely sloped yards, renting a small skid steer or a heavy-duty tiller can save you a tremendous amount of time and physical effort. For smaller, more manageable areas, a shovel and wheelbarrow will suffice.</p>
+                        </details>
+                        <details class="bg-white p-6 rounded-lg shadow-sm group">
+                            <summary class="font-semibold text-lg cursor-pointer flex justify-between items-center">
+                                What's the best time of year to do this?
+                                <span class="transform transition-transform duration-200 group-open:rotate-45">+</span>
+                            </summary>
+                            <p class="text-gray-600 mt-4">Spring and early fall are ideal. The weather is typically mild, and the soil is not too hard or too wet. This also gives new grass seed the best chance to germinate and establish before extreme heat or cold sets in.</p>
+                        </details>
+                    </div>
+                </section>
+
+                <!-- Troubleshooting Section -->
+                <section id="troubleshooting" class="mt-16 max-w-4xl mx-auto">
+                    <h2 class="text-3xl font-bold text-center mb-8 text-gray-700">Troubleshooting</h2>
+                    <p class="text-center text-gray-600 -mt-4 mb-8">Don't worry if you hit a snag. Every project has them! Here's how to solve common issues.</p>
+                     <div class="space-y-4">
+                        <details class="bg-white p-6 rounded-lg shadow-sm group">
+                            <summary class="font-semibold text-lg cursor-pointer flex justify-between items-center">
+                                My soil is very compacted and hard to dig.
+                                <span class="transform transition-transform duration-200 group-open:rotate-45">+</span>
+                            </summary>
+                            <p class="text-gray-600 mt-4">Water the area thoroughly a day or two before you plan to dig. This will soften the ground significantly. If it's still too difficult, renting a garden tiller is your best option to break up the compacted soil.</p>
+                        </details>
+                        <details class="bg-white p-6 rounded-lg shadow-sm group">
+                            <summary class="font-semibold text-lg cursor-pointer flex justify-between items-center">
+                                After watering, I have puddles forming.
+                                <span class="transform transition-transform duration-200 group-open:rotate-45">+</span>
+                            </summary>
+                            <p class="text-gray-600 mt-4">Puddles indicate low spots you may have missed or areas with poor drainage (heavy clay soil). Wait for the area to dry, then add more topsoil/sand mixture to these spots and rake them smooth. Amending the soil with compost can also improve drainage over time.</p>
+                        </details>
+                    </div>
+                </section>
+
+            </main>
+
+            <!-- Footer -->
+            <footer class="text-center mt-16 py-8 border-t border-transparent">
+                <p class="text-gray-600 bg-white/50 rounded-full px-4 py-2 inline-block">Great work, Staci! Take your time, trust the process, and get ready to enjoy your beautiful new backyard.</p>
+            </footer>
+
+        </div>
+    </div>
+</body>
+</html>
