@@ -18,7 +18,7 @@
         /* For Desktop: A fixed background image on the body */
         @media (min-width: 1024px) { /* lg breakpoint in Tailwind */
             body {
-                background-image: url('https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?auto=format&fit=crop&q=80');
+                background-image: url('https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&q=80');
                 background-size: cover;
                 background-position: center;
                 background-attachment: fixed;
@@ -28,7 +28,7 @@
         /* For Mobile/Tablet: A scrolling background on the main container */
         @media (max-width: 1023px) {
             .content-wrapper {
-                background-image: url('https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?auto=format&fit=crop&q=80');
+                background-image: url('https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&q=80');
                 background-size: cover;
                 background-position: center;
             }
@@ -52,6 +52,10 @@
         .card-content {
             flex-grow: 1;
         }
+        /* Custom class for text shadow to improve readability */
+        .text-shadow-custom {
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+        }
     </style>
 </head>
 <body>
@@ -60,14 +64,14 @@
         <div class="container mx-auto p-4 sm:p-6 lg:p-8">
             <!-- Header -->
             <header class="text-center mb-10">
-                <h1 class="text-4xl sm:text-5xl font-bold text-emerald-700">Staci's Backyard Leveling Guide</h1>
-                <p class="text-lg text-gray-600 mt-4 max-w-2xl mx-auto">Staci, it's completely normal to feel overwhelmed by a big project like this. But we're going to break it down into simple, manageable steps. You've totally got this!</p>
+                <h1 class="text-4xl sm:text-5xl font-bold text-white text-shadow-custom">Staci's Backyard Leveling Guide</h1>
+                <p class="text-lg text-gray-200 mt-4 max-w-2xl mx-auto text-shadow-custom">Staci, it's completely normal to feel overwhelmed by a big project like this. But we're going to break it down into simple, manageable steps. You've totally got this!</p>
             </header>
 
             <main>
                 <!-- Step-by-Step Guide -->
                 <section id="steps">
-                    <h2 class="text-3xl font-bold text-center mb-8 text-gray-700">The 7 Steps to a Perfectly Level Yard</h2>
+                    <h2 class="text-3xl font-bold text-center mb-8 text-white text-shadow-custom">The 7 Steps to a Perfectly Level Yard</h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 
                         <!-- Step 1: Plan & Prepare -->
@@ -250,8 +254,8 @@
 
                 <!-- FAQ Section -->
                 <section id="faq" class="mt-16 max-w-4xl mx-auto">
-                    <h2 class="text-3xl font-bold text-center mb-8 text-gray-700">Frequently Asked Questions</h2>
-                    <p class="text-center text-gray-600 -mt-4 mb-8">Here are a few common questions that might pop up. You're not alone in wondering!</p>
+                    <h2 class="text-3xl font-bold text-center mb-8 text-white text-shadow-custom">Frequently Asked Questions</h2>
+                    <p class="text-center text-gray-200 -mt-4 mb-8 text-shadow-custom">Here are a few common questions that might pop up. You're not alone in wondering!</p>
                     <div class="space-y-4">
                         <details class="bg-white p-6 rounded-lg shadow-sm group">
                             <summary class="font-semibold text-lg cursor-pointer flex justify-between items-center">
@@ -279,8 +283,8 @@
 
                 <!-- Troubleshooting Section -->
                 <section id="troubleshooting" class="mt-16 max-w-4xl mx-auto">
-                    <h2 class="text-3xl font-bold text-center mb-8 text-gray-700">Troubleshooting</h2>
-                    <p class="text-center text-gray-600 -mt-4 mb-8">Don't worry if you hit a snag. Every project has them! Here's how to solve common issues.</p>
+                    <h2 class="text-3xl font-bold text-center mb-8 text-white text-shadow-custom">Troubleshooting</h2>
+                    <p class="text-center text-gray-200 -mt-4 mb-8 text-shadow-custom">Don't worry if you hit a snag. Every project has them! Here's how to solve common issues.</p>
                      <div class="space-y-4">
                         <details class="bg-white p-6 rounded-lg shadow-sm group">
                             <summary class="font-semibold text-lg cursor-pointer flex justify-between items-center">
@@ -303,7 +307,7 @@
 
             <!-- Footer -->
             <footer class="text-center mt-16 py-8 border-t border-transparent">
-                <p class="text-gray-600 bg-white/50 rounded-full px-4 py-2 inline-block">Great work, Staci! Take your time, trust the process, and get ready to enjoy your beautiful new backyard.</p>
+                <p class="text-white bg-black/20 rounded-full px-4 py-2 inline-block text-shadow-custom">Great work, Staci! Take your time, trust the process, and get ready to enjoy your beautiful new backyard.</p>
             </footer>
 
         </div>
