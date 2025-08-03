@@ -8,17 +8,20 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        html {
+            scroll-behavior: smooth;
+        }
         body {
             font-family: 'Inter', sans-serif;
             background-color: #f9fafb; /* A fallback color */
         }
-
         /* --- Background Image Logic --- */
         /* For Desktop: A fixed background image on the body */
         @media (min-width: 1024px) { /* lg breakpoint in Tailwind */
             body {
-                background-image: url('https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&q=80');
+                background-image: url('https://images.unsplash.com/photo-1612380635121-411eda9ecbb9?q=80&w=3456&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
                 background-size: cover;
                 background-position: center;
                 background-attachment: fixed;
@@ -28,12 +31,11 @@
         /* For Mobile/Tablet: A scrolling background on the main container */
         @media (max-width: 1023px) {
             .content-wrapper {
-                background-image: url('https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&q=80');
+                background-image: url('https://images.unsplash.com/photo-1612380635121-411eda9ecbb9?q=80&w=3456&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
                 background-size: cover;
                 background-position: center;
             }
         }
-
         .step-card {
             transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
             display: flex;
@@ -62,9 +64,84 @@
         .arrow {
             transition: transform 0.2s ease-in-out;
         }
+        /* Progress bar styles */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background-color: #10b981;
+            z-index: 1000;
+            transition: width 0.3s ease;
+        }
+        /* Checklist styles */
+        .checklist-item {
+            transition: all 0.2s ease;
+        }
+        .checklist-item.checked {
+            text-decoration: line-through;
+            color: #9ca3af;
+        }
+        /* Floating action button */
+        .fab {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background-color: #10b981;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            z-index: 999;
+            transition: all 0.3s ease;
+        }
+        .fab:hover {
+            transform: scale(1.1);
+            background-color: #059669;
+        }
+        /* Motivational quote styles */
+        .quote-box {
+            border-left: 4px solid #10b981;
+            padding-left: 1rem;
+            font-style: italic;
+            margin: 1.5rem 0;
+        }
+        /* Timer styles */
+        .timer {
+            display: inline-flex;
+            align-items: center;
+            background-color: #f3f4f6;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        .timer i {
+            margin-right: 0.5rem;
+            color: #10b981;
+        }
+        /* Hide any potential YouTube buttons */
+        .ytp-button, .ytp-large-play-button, .ytp-play-button, .ytp-youtube-button, 
+        [class*="youtube"], [id*="youtube"], [class*="ytp-"], [id*="ytp-"] {
+            display: none !important;
+            visibility: hidden !important;
+        }
     </style>
 </head>
 <body>
+    <!-- Progress bar -->
+    <div class="progress-bar" id="progressBar"></div>
+    
+    <!-- Floating action button for motivation -->
+    <div class="fab" id="motivationBtn" title="Need motivation?">
+        <i class="fas fa-heart"></i>
+    </div>
+
     <!-- On desktop, this has a transparent background. On mobile, it gets the background image. -->
     <div class="content-wrapper bg-gray-50/95 lg:bg-transparent min-h-screen">
         <div class="container mx-auto p-4 sm:p-6 lg:p-8">
@@ -72,74 +149,196 @@
             <header class="text-center mb-10">
                 <h1 class="text-4xl sm:text-5xl font-bold text-white text-shadow-custom">Staci's Backyard Leveling Guide</h1>
                 <p class="text-lg text-gray-200 mt-4 max-w-2xl mx-auto text-shadow-custom">Staci, it's completely normal to feel overwhelmed by a big project like this. But we're going to break it down into simple, manageable steps. You've totally got this!</p>
+                
+                <!-- Quick start buttons -->
+                <div class="mt-6 flex flex-wrap justify-center gap-3">
+                    <a href="#motivation" class="bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-2 px-4 rounded-lg transition">
+                        <i class="fas fa-rocket mr-2"></i> Get Motivated
+                    </a>
+                    <a href="#steps" class="bg-white hover:bg-gray-100 text-emerald-700 font-medium py-2 px-4 rounded-lg transition">
+                        <i class="fas fa-list-ol mr-2"></i> See the Steps
+                    </a>
+                    <a href="#planning" class="bg-white hover:bg-gray-100 text-emerald-700 font-medium py-2 px-4 rounded-lg transition">
+                        <i class="fas fa-calculator mr-2"></i> Plan & Budget
+                    </a>
+                </div>
             </header>
-
+            
             <main>
                 <!-- New Motivation Section -->
                 <section id="motivation" class="mb-16 max-w-4xl mx-auto">
                     <h2 class="text-3xl font-bold text-center mb-8 text-white text-shadow-custom">Getting Started & Staying Motivated</h2>
                     <div class="bg-white p-8 rounded-xl shadow-md">
                         <p class="text-gray-700 mb-4">The hardest part of any big project is starting. Remember, this is a marathon, not a sprint. The goal is progress, not perfection on day one.</p>
+                        
+                        <div class="quote-box">
+                            "The secret of getting ahead is getting started. The secret of getting started is breaking your complex overwhelming tasks into small manageable tasks, and then starting on the first one." - Mark Twain
+                        </div>
+                        
                         <h3 class="text-xl font-semibold text-emerald-700 mb-2">Find Your "Why"</h3>
                         <p class="text-gray-600 mb-4">Before you lift a single shovel, take a moment. Close your eyes and picture the finished yard. Imagine the level green lawn, the beautiful jasmine climbing your new fence, and the feeling of enjoying a space you created yourself. This vision is your "why"—it's the most powerful tool you have when motivation dips.</p>
+                        
+                        <div class="bg-emerald-50 rounded-lg p-4 mb-4">
+                            <h4 class="font-medium text-emerald-800 mb-2"><i class="fas fa-lightbulb mr-2"></i> Visualization Exercise</h4>
+                            <p class="text-emerald-700 text-sm">Take 5 minutes to write down exactly how you'll use your new backyard. Will you have morning coffee there? Watch the kids play? Entertain friends? Keep this note somewhere visible!</p>
+                        </div>
+                        
                         <h3 class="text-xl font-semibold text-emerald-700 mt-6 mb-2">Your First, Tiny Step</h3>
-                        <p class="text-gray-600">Don't think about leveling the whole yard today. Just focus on one, tiny, achievable goal to build momentum. Your only task for this weekend could be: **Call 811 to get your utility lines marked.** That's it! Once that's done, you've officially started, and every step after that feels easier.</p>
+                        <p class="text-gray-600 mb-4">Don't think about leveling the whole yard today. Just focus on one, tiny, achievable goal to build momentum. Your only task for this weekend could be: **Call 811 to get your utility lines marked.** That's it! Once that's done, you've officially started, and every step after that feels easier.</p>
+                        
+                        <div class="bg-yellow-50 rounded-lg p-4 mt-4">
+                            <h4 class="font-medium text-yellow-800 mb-2"><i class="fas fa-clock mr-2"></i> 15-Minute Rule</h4>
+                            <p class="text-yellow-700 text-sm">On days you feel zero motivation, commit to just 15 minutes of work. Often, once you start, you'll find the energy to continue. If not, you still made progress!</p>
+                        </div>
                     </div>
                 </section>
-
+                
+                <!-- New Progress Tracker Section -->
+                <section id="progress" class="mb-16 max-w-4xl mx-auto">
+                    <h2 class="text-3xl font-bold text-center mb-8 text-white text-shadow-custom">Your Progress Tracker</h2>
+                    <div class="bg-white p-8 rounded-xl shadow-md">
+                        <p class="text-gray-700 mb-6">Track your progress as you go! Check off each small step and watch your momentum build. Remember, every checked box is a victory worth celebrating.</p>
+                        
+                        <div class="space-y-3">
+                            <div class="checklist-item flex items-center p-3 bg-gray-50 rounded-lg">
+                                <input type="checkbox" id="check1" class="w-5 h-5 text-emerald-600 rounded focus:ring-emerald-500">
+                                <label for="check1" class="ml-3 text-gray-700 cursor-pointer">Call 811 for utility line marking</label>
+                            </div>
+                            <div class="checklist-item flex items-center p-3 bg-gray-50 rounded-lg">
+                                <input type="checkbox" id="check2" class="w-5 h-5 text-emerald-600 rounded focus:ring-emerald-500">
+                                <label for="check2" class="ml-3 text-gray-700 cursor-pointer">Take "before" photos of the yard</label>
+                            </div>
+                            <div class="checklist-item flex items-center p-3 bg-gray-50 rounded-lg">
+                                <input type="checkbox" id="check3" class="w-5 h-5 text-emerald-600 rounded focus:ring-emerald-500">
+                                <label for="check3" class="ml-3 text-gray-700 cursor-pointer">Clear a small section of the yard (15 minutes)</label>
+                            </div>
+                            <div class="checklist-item flex items-center p-3 bg-gray-50 rounded-lg">
+                                <input type="checkbox" id="check4" class="w-5 h-5 text-emerald-600 rounded focus:ring-emerald-500">
+                                <label for="check4" class="ml-3 text-gray-700 cursor-pointer">Gather basic tools (shovel, rake, gloves)</label>
+                            </div>
+                            <div class="checklist-item flex items-center p-3 bg-gray-50 rounded-lg">
+                                <input type="checkbox" id="check5" class="w-5 h-5 text-emerald-600 rounded focus:ring-emerald-500">
+                                <label for="check5" class="ml-3 text-gray-700 cursor-pointer">Perform the soil jar test</label>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 p-4 bg-emerald-50 rounded-lg">
+                            <p class="text-emerald-700 font-medium"><i class="fas fa-trophy mr-2"></i> You've completed <span id="progressCount">0</span> of 5 starter tasks!</p>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5 mt-2">
+                                <div id="progressBarInner" class="bg-emerald-600 h-2.5 rounded-full" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
                 <!-- New Budget and Timeline Section -->
                 <section id="planning" class="mb-16 max-w-4xl mx-auto">
                     <h2 class="text-3xl font-bold text-center mb-8 text-white text-shadow-custom">Creating a Simple Budget & Timeline</h2>
                     <div class="bg-white p-8 rounded-xl shadow-md">
                         <p class="text-gray-700 mb-4">A little planning goes a long way. Thinking about time and money upfront removes uncertainty and helps you stay in control.</p>
+                        
                         <h3 class="text-xl font-semibold text-emerald-700 mb-2">Sample Budget Checklist</h3>
-                        <ul class="list-disc list-inside text-gray-600 space-y-2">
-                            <li>**Tool Rentals:** Tiller, lawn roller, etc.</li>
+                        <ul class="list-disc list-inside text-gray-600 space-y-2 mb-6">
+                            <li>**Tool Rentals:** Tiller, lawn roller, etc. <span class="timer"><i class="far fa-clock"></i> Rent for weekends only</span></li>
                             <li>**Materials:** Topsoil/sand mix (check calculator below!), compost, fence posts, panels, concrete, jasmine plants, grass seed/sod.</li>
                             <li>**Supplies:** Work gloves, stakes, string, marking paint.</li>
                             <li>**Disposal:** Cost to haul away old sod, weeds, or excess soil.</li>
                             <li>**Contingency Fund:** It's smart to add 10-15% to your budget for unexpected costs!</li>
                         </ul>
-                        <h3 class="text-xl font-semibold text-emerald-700 mt-6 mb-2">Sample Project Timeline</h3>
+                        
+                        <div class="bg-blue-50 rounded-lg p-4 mb-6">
+                            <h4 class="font-medium text-blue-800 mb-2"><i class="fas fa-piggy-bank mr-2"></i> Money-Saving Tip</h4>
+                            <p class="text-blue-700 text-sm">Ask neighbors if they want to split the cost of tool rentals. Many tools like tillers are only needed for a day or two, and sharing can cut costs significantly!</p>
+                        </div>
+                        
+                        <h3 class="text-xl font-semibold text-emerald-700 mb-2">Sample Project Timeline</h3>
                         <ul class="list-disc list-inside text-gray-600 space-y-2">
-                            <li>**Weekend 1:** Finalize plan. Call 811. Start clearing weeds and debris.</li>
-                            <li>**Weekend 2:** Finish clearing. Get materials (stakes, string, level). Map the slope.</li>
-                            <li>**Weekend 3:** Dig out high spots and start filling low spots. Order soil for delivery.</li>
-                            <li>**Weekend 4:** Finish leveling and grading. Water and let settle.</li>
-                            <li>**Fence & Planting:** Dedicate separate weekends for building the fence, and then finally for planting your jasmine and lawn.</li>
+                            <li>**Weekend 1:** Finalize plan. Call 811. Start clearing weeds and debris. <span class="text-sm text-gray-500">(Just 1-2 hours each day)</span></li>
+                            <li>**Weekend 2:** Finish clearing. Get materials (stakes, string, level). Map the slope. <span class="text-sm text-gray-500">(Focus on one section at a time)</span></li>
+                            <li>**Weekend 3:** Dig out high spots and start filling low spots. Order soil for delivery. <span class="text-sm text-gray-500">(Work in small batches)</span></li>
+                            <li>**Weekend 4:** Finish leveling and grading. Water and let settle. <span class="text-sm text-gray-500">(Almost there!)</span></li>
+                            <li>**Fence & Planting:** Dedicate separate weekends for building the fence, and then finally for planting your jasmine and lawn. <span class="text-sm text-gray-500">(The fun finishing touches!)</span></li>
                         </ul>
+                        
+                        <div class="mt-6 bg-purple-50 rounded-lg p-4">
+                            <h4 class="font-medium text-purple-800 mb-2"><i class="fas fa-calendar-alt mr-2"></i> Pacing Yourself</h4>
+                            <p class="text-purple-700 text-sm">Remember, this timeline is just a guide! It's perfectly fine to take longer. The goal is steady progress, not burnout. Some weekends you might accomplish more, others less—that's completely normal.</p>
+                        </div>
                     </div>
                 </section>
-
+                
                 <!-- New Soil Calculator Section -->
                 <section id="calculator" class="mb-16 max-w-4xl mx-auto">
                     <h2 class="text-3xl font-bold text-center mb-8 text-white text-shadow-custom">How Much Soil Do I Need?</h2>
                     <div class="bg-white p-8 rounded-xl shadow-md">
                         <p class="text-gray-700 mb-4">Use this simple calculator to estimate the cubic yards of topsoil you'll need to order. Measure the area you want to fill and the average depth you need to add.</p>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
                             <div>
                                 <label for="length" class="block text-sm font-medium text-gray-700">Length (feet)</label>
-                                <input type="number" id="length" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500 sm:text-sm">
+                                <input type="number" id="length" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500 sm:text-sm" placeholder="e.g. 20">
                             </div>
                             <div>
                                 <label for="width" class="block text-sm font-medium text-gray-700">Width (feet)</label>
-                                <input type="number" id="width" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500 sm:text-sm">
+                                <input type="number" id="width" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500 sm:text-sm" placeholder="e.g. 15">
                             </div>
                             <div>
                                 <label for="depth" class="block text-sm font-medium text-gray-700">Average Depth (inches)</label>
-                                <input type="number" id="depth" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500 sm:text-sm">
+                                <input type="number" id="depth" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500 sm:text-sm" placeholder="e.g. 4">
                             </div>
                         </div>
-                        <button id="calculateBtn" class="mt-4 w-full bg-emerald-600 text-white font-bold py-2 px-4 rounded-md hover:bg-emerald-700 transition">Calculate</button>
-                        <div id="result" class="mt-4 text-center text-xl font-bold text-gray-800"></div>
+                        
+                        <button id="calculateBtn" class="w-full bg-emerald-600 text-white font-bold py-3 px-4 rounded-md hover:bg-emerald-700 transition">
+                            <i class="fas fa-calculator mr-2"></i> Calculate Soil Needed
+                        </button>
+                        
+                        <div id="result" class="mt-4 text-center p-4 bg-emerald-50 rounded-lg text-xl font-bold text-emerald-800"></div>
+                        
+                        <div class="mt-4 text-sm text-gray-600">
+                            <p><i class="fas fa-info-circle mr-2"></i> Tip: Most suppliers sell soil by the cubic yard. One cubic yard covers about 100 square feet at 3 inches deep.</p>
+                        </div>
                     </div>
                 </section>
-
+                
+                <!-- New Soil Test Section -->
+                <section id="soil-test" class="mb-16 max-w-4xl mx-auto">
+                    <h2 class="text-3xl font-bold text-center mb-8 text-white text-shadow-custom">First, Understand Your Soil: The Jar Test</h2>
+                    <div class="bg-white p-8 rounded-xl shadow-md">
+                        <p class="text-gray-700 mb-4">Before you buy any soil, let's figure out what you're working with. This simple test is the most powerful piece of information you can have. It tells you if your soil is mostly sand, silt, or heavy clay, which determines how well it drains and what you need to add to it.</p>
+                        
+                        <h3 class="text-xl font-semibold text-emerald-700 mb-2">How to Do the Test</h3>
+                        <ol class="list-decimal list-inside text-gray-600 space-y-2 mb-6">
+                            <li>**Dig:** Grab a trowel and a clear mason jar. Dig down about 5-6 inches and get a sample of your soil, filling the jar about halfway.</li>
+                            <li>**Fill & Shake:** Fill the rest of the jar with water, leaving an inch of space at the top. Add a drop of dish soap, seal the lid tightly, and shake vigorously for a few minutes until all the clumps are gone.</li>
+                            <li>**Wait:** Set the jar on a level surface and leave it completely undisturbed for 24 hours. The different soil types will settle into visible layers.</li>
+                        </ol>
+                        
+                        <div class="bg-amber-50 rounded-lg p-4 mb-6">
+                            <h4 class="font-medium text-amber-800 mb-2"><i class="fas fa-exclamation-triangle mr-2"></i> Why This Matters</h4>
+                            <p class="text-amber-700 text-sm">Understanding your soil composition helps you make the right amendments. Clay soil needs more organic matter to improve drainage, while sandy soil needs more compost to retain moisture.</p>
+                        </div>
+                        
+                        <h3 class="text-xl font-semibold text-emerald-700 mb-2">Reading Your Results</h3>
+                        <p class="text-gray-600 mb-4">You'll see distinct layers form:</p>
+                        <ul class="list-disc list-inside text-gray-600 space-y-2 mb-4">
+                            <li>**Bottom Layer (Sand):** The heaviest particles settle first. This layer will look gritty.</li>
+                            <li>**Middle Layer (Silt):** Finer, smoother particles will settle on top of the sand.</li>
+                            <li>**Top Layer (Clay):** The finest, stickiest particles will form the top layer, and the water above may stay cloudy.</li>
+                        </ul>
+                        <p class="text-gray-700 mb-4">If you have a very thick top layer of clay, you know you'll need to add plenty of compost to improve drainage. If it's almost all sand, you'll need more compost and topsoil to help it retain moisture.</p>
+                        
+                        <div class="mt-6 pt-6 border-t border-gray-200 flex justify-center text-sm">
+                           <a href="https://www.youtube.com/watch?v=PvN_oWoechg" target="_blank" class="flex items-center text-emerald-600 hover:text-emerald-800 font-medium">
+                               <i class="fab fa-youtube mr-2"></i> Watch Tutorial: The Soil Jar Test
+                           </a>
+                       </div>
+                    </div>
+                </section>
+                
                 <!-- Step-by-Step Guide -->
                 <section id="steps">
                     <h2 class="text-3xl font-bold text-center mb-8 text-white text-shadow-custom">The 7 Steps to a Perfectly Level Yard</h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-
                         <!-- Step 1: Plan & Prepare -->
                         <div class="step-card bg-white p-6 rounded-xl shadow-md">
                             <div class="card-content">
@@ -148,6 +347,11 @@
                                     <h3 class="text-xl font-semibold ml-4">Plan & Prepare</h3>
                                 </div>
                                 <p class="text-gray-600">First, clear the area of all debris, rocks, and existing vegetation. Check for any utility lines before you dig! Mark out the project area with stakes and string.</p>
+                                
+                                <div class="mt-4 bg-blue-50 rounded-lg p-3">
+                                    <p class="text-blue-700 text-sm"><i class="fas fa-lightbulb mr-2"></i> <strong>Pro Tip:</strong> Work in small sections. Clear just 5x5 feet at a time to avoid feeling overwhelmed.</p>
+                                </div>
+                                
                                 <details class="mt-4">
                                     <summary class="font-semibold text-emerald-600 cursor-pointer flex items-center">
                                         <span class="arrow mr-2">&#9654;</span> Show Action Steps
@@ -161,16 +365,14 @@
                             </div>
                             <div class="mt-4 pt-4 border-t border-gray-200 flex justify-around text-sm">
                                 <a href="https://www.youtube.com/watch?v=1oyQQvLyRgc" target="_blank" class="flex items-center text-emerald-600 hover:text-emerald-800 font-medium">
-                                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
-                                    Watch Tutorial
+                                    <i class="fab fa-youtube mr-2"></i> Watch Tutorial
                                 </a>
                                 <a href="https://www.thisoldhouse.com/lawns/yard-grading" target="_blank" class="flex items-center text-emerald-600 hover:text-emerald-800 font-medium">
-                                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path><path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.03 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"></path></svg>
-                                    Read More
+                                    <i class="fas fa-book mr-2"></i> Read More
                                 </a>
                             </div>
                         </div>
-
+                        
                         <!-- Step 2: Map Your Slope -->
                         <div class="step-card bg-white p-6 rounded-xl shadow-md">
                             <div class="card-content">
@@ -179,6 +381,11 @@
                                     <h3 class="text-xl font-semibold ml-4">Map Your Slope</h3>
                                 </div>
                                 <p class="text-gray-600">Hammer wooden stakes into the ground in a grid pattern across your work area (about 10 feet apart). These will be your reference points for leveling.</p>
+                                
+                                <div class="mt-4 bg-blue-50 rounded-lg p-3">
+                                    <p class="text-blue-700 text-sm"><i class="fas fa-lightbulb mr-2"></i> <strong>Pro Tip:</strong> Use brightly colored spray paint to mark where your stakes will go. This makes it easier to see your grid pattern.</p>
+                                </div>
+                                
                                 <details class="mt-4">
                                     <summary class="font-semibold text-emerald-600 cursor-pointer flex items-center">
                                         <span class="arrow mr-2">&#9654;</span> Show Action Steps
@@ -192,16 +399,14 @@
                             </div>
                             <div class="mt-4 pt-4 border-t border-gray-200 flex justify-around text-sm">
                                 <a href="https://www.youtube.com/watch?v=3SkhJQrttSw" target="_blank" class="flex items-center text-emerald-600 hover:text-emerald-800 font-medium">
-                                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
-                                    Watch Tutorial
+                                    <i class="fab fa-youtube mr-2"></i> Watch Tutorial
                                 </a>
                                 <a href="https://www.bobvila.com/articles/how-to-level-a-yard/" target="_blank" class="flex items-center text-emerald-600 hover:text-emerald-800 font-medium">
-                                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path><path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.03 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"></path></svg>
-                                    Read More
+                                    <i class="fas fa-book mr-2"></i> Read More
                                 </a>
                             </div>
                         </div>
-
+                        
                         <!-- Step 3: Find Your Level -->
                         <div class="step-card bg-white p-6 rounded-xl shadow-md">
                             <div class="card-content">
@@ -210,6 +415,11 @@
                                     <h3 class="text-xl font-semibold ml-4">Find Your Level</h3>
                                 </div>
                                 <p class="text-gray-600">Tie a string to a stake in a high area. Use a line level to get the string perfectly level, then attach it to the next stake. Mark the level line on each stake. Repeat for the entire grid.</p>
+                                
+                                <div class="mt-4 bg-blue-50 rounded-lg p-3">
+                                    <p class="text-blue-700 text-sm"><i class="fas fa-lightbulb mr-2"></i> <strong>Pro Tip:</strong> A laser level is worth renting if you have a large area. It's much faster and more accurate than string levels.</p>
+                                </div>
+                                
                                 <details class="mt-4">
                                     <summary class="font-semibold text-emerald-600 cursor-pointer flex items-center">
                                         <span class="arrow mr-2">&#9654;</span> Show Action Steps
@@ -223,16 +433,14 @@
                             </div>
                             <div class="mt-4 pt-4 border-t border-gray-200 flex justify-around text-sm">
                                 <a href="https://www.youtube.com/watch?v=ugKkVvzCxlw" target="_blank" class="flex items-center text-emerald-600 hover:text-emerald-800 font-medium">
-                                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
-                                    Watch Tutorial
+                                    <i class="fab fa-youtube mr-2"></i> Watch Tutorial
                                 </a>
                                 <a href="https://www.wikihow.com/Level-Your-Yard" target="_blank" class="flex items-center text-emerald-600 hover:text-emerald-800 font-medium">
-                                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path><path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.03 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"></path></svg>
-                                    Read More
+                                    <i class="fas fa-book mr-2"></i> Read More
                                 </a>
                             </div>
                         </div>
-
+                        
                         <!-- Step 4: Remove High Spots -->
                         <div class="step-card bg-white p-6 rounded-xl shadow-md">
                             <div class="card-content">
@@ -241,6 +449,11 @@
                                     <h3 class="text-xl font-semibold ml-4">Remove High Spots</h3>
                                 </div>
                                 <p class="text-gray-600">Using your marked stakes as a guide, use a shovel or tiller to remove soil from the high spots. Move this soil to the low spots or remove it from the yard.</p>
+                                
+                                <div class="mt-4 bg-blue-50 rounded-lg p-3">
+                                    <p class="text-blue-700 text-sm"><i class="fas fa-lightbulb mr-2"></i> <strong>Pro Tip:</strong> Set a timer for 15-20 minutes and work without stopping. When the timer goes off, take a break. This prevents burnout.</p>
+                                </div>
+                                
                                 <details class="mt-4">
                                     <summary class="font-semibold text-emerald-600 cursor-pointer flex items-center">
                                         <span class="arrow mr-2">&#9654;</span> Show Action Steps
@@ -254,16 +467,14 @@
                             </div>
                             <div class="mt-4 pt-4 border-t border-gray-200 flex justify-around text-sm">
                                 <a href="https://www.youtube.com/watch?v=WRwsvtQL7hQ" target="_blank" class="flex items-center text-emerald-600 hover:text-emerald-800 font-medium">
-                                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
-                                    Watch Tutorial
+                                    <i class="fab fa-youtube mr-2"></i> Watch Tutorial
                                 </a>
                                 <a href="https://www.thespruce.com/level-your-lawn-out-by-topdressing-2132666" target="_blank" class="flex items-center text-emerald-600 hover:text-emerald-800 font-medium">
-                                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path><path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.03 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"></path></svg>
-                                    Read More
+                                    <i class="fas fa-book mr-2"></i> Read More
                                 </a>
                             </div>
                         </div>
-
+                        
                         <!-- Step 5: Fill Low Spots -->
                         <div class="step-card bg-white p-6 rounded-xl shadow-md">
                             <div class="card-content">
@@ -272,6 +483,11 @@
                                     <h3 class="text-xl font-semibold ml-4">Fill Low Spots</h3>
                                 </div>
                                 <p class="text-gray-600">Add topsoil to the low-lying areas. A good mix is 60% sand, 40% topsoil. Add soil in layers, lightly tamping it down as you go to prevent major settling.</p>
+                                
+                                <div class="mt-4 bg-blue-50 rounded-lg p-3">
+                                    <p class="text-blue-700 text-sm"><i class="fas fa-lightbulb mr-2"></i> <strong>Pro Tip:</strong> Add soil in 2-inch layers and water each layer lightly before adding the next. This helps prevent settling later.</p>
+                                </div>
+                                
                                 <details class="mt-4">
                                     <summary class="font-semibold text-emerald-600 cursor-pointer flex items-center">
                                         <span class="arrow mr-2">&#9654;</span> Show Action Steps
@@ -285,16 +501,14 @@
                             </div>
                             <div class="mt-4 pt-4 border-t border-gray-200 flex justify-around text-sm">
                                 <a href="https://www.youtube.com/shorts/O0wuHGPgrzY" target="_blank" class="flex items-center text-emerald-600 hover:text-emerald-800 font-medium">
-                                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
-                                    Watch Tutorial
+                                    <i class="fab fa-youtube mr-2"></i> Watch Tutorial
                                 </a>
                                 <a href="https://www.homedepot.com/c/ah/how-to-level-a-yard/9ba683603be9fa5395fab90197381821" target="_blank" class="flex items-center text-emerald-600 hover:text-emerald-800 font-medium">
-                                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path><path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.03 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"></path></svg>
-                                    Read More
+                                    <i class="fas fa-book mr-2"></i> Read More
                                 </a>
                             </div>
                         </div>
-
+                        
                         <!-- Step 6: Rake & Grade -->
                         <div class="step-card bg-white p-6 rounded-xl shadow-md">
                             <div class="card-content">
@@ -303,6 +517,11 @@
                                     <h3 class="text-xl font-semibold ml-4">Rake & Grade</h3>
                                 </div>
                                 <p class="text-gray-600">Use a large landscape rake to smooth the entire surface. Use the back of the rake to create a final, even grade. Eyeball it from different angles to check for consistency.</p>
+                                
+                                <div class="mt-4 bg-blue-50 rounded-lg p-3">
+                                    <p class="text-blue-700 text-sm"><i class="fas fa-lightbulb mr-2"></i> <strong>Pro Tip:</strong> Work at dawn or dusk when the sun is low. The long shadows will make it easier to see any uneven spots in your yard.</p>
+                                </div>
+                                
                                 <details class="mt-4">
                                     <summary class="font-semibold text-emerald-600 cursor-pointer flex items-center">
                                         <span class="arrow mr-2">&#9654;</span> Show Action Steps
@@ -316,12 +535,10 @@
                             </div>
                             <div class="mt-4 pt-4 border-t border-gray-200 flex justify-around text-sm">
                                 <a href="https://www.youtube.com/watch?v=qaPwUXlhYXY" target="_blank" class="flex items-center text-emerald-600 hover:text-emerald-800 font-medium">
-                                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
-                                    Watch Tutorial
+                                    <i class="fab fa-youtube mr-2"></i> Watch Tutorial
                                 </a>
                                 <a href="https://www.lowes.com/n/how-to/how-to-level-a-yard" target="_blank" class="flex items-center text-emerald-600 hover:text-emerald-800 font-medium">
-                                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path><path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.03 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"></path></svg>
-                                    Read More
+                                    <i class="fas fa-book mr-2"></i> Read More
                                 </a>
                             </div>
                         </div>
@@ -334,6 +551,11 @@
                                     <h3 class="text-xl font-semibold ml-4">Water & Settle</h3>
                                 </div>
                                 <p class="text-gray-600">Lightly water the entire area. This helps the soil settle. You may notice new low spots appear. Fill them in, re-rake, and let the area dry before planting grass or landscaping.</p>
+                                
+                                <div class="mt-4 bg-blue-50 rounded-lg p-3">
+                                    <p class="text-blue-700 text-sm"><i class="fas fa-lightbulb mr-2"></i> <strong>Pro Tip:</strong> Use a sprinkler rather than a hose for even watering. This prevents creating new low spots with heavy water flow.</p>
+                                </div>
+                                
                                 <details class="mt-4">
                                     <summary class="font-semibold text-emerald-600 cursor-pointer flex items-center">
                                         <span class="arrow mr-2">&#9654;</span> Show Action Steps
@@ -347,23 +569,21 @@
                             </div>
                             <div class="mt-4 pt-4 border-t border-gray-200 flex justify-around text-sm">
                                 <a href="https://www.youtube.com/watch?v=QJGGDEvuYRY" target="_blank" class="flex items-center text-emerald-600 hover:text-emerald-800 font-medium">
-                                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
-                                    Watch Tutorial
+                                    <i class="fab fa-youtube mr-2"></i> Watch Tutorial
                                 </a>
                                 <a href="https://www.pennington.com/all-products/grass-seed/resources/how-to-plant-grass-seed-on-slopes-and-hills" target="_blank" class="flex items-center text-emerald-600 hover:text-emerald-800 font-medium">
-                                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path><path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.03 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"></path></svg>
-                                    Read More
+                                    <i class="fas fa-book mr-2"></i> Read More
                                 </a>
                             </div>
                         </div>
                     </div>
                 </section>
-
+                
                 <!-- New Tool Guide Section -->
                 <section id="tool-guide" class="mt-16 max-w-4xl mx-auto">
                     <h2 class="text-3xl font-bold text-center mb-8 text-white text-shadow-custom">Tool Guide: Rent vs. Buy</h2>
                     <div class="bg-white p-8 rounded-xl shadow-md">
-                        <p class="text-gray-700 mb-4">Knowing which tools to buy and which to rent can save you money and storage space. Here’s a simple breakdown for this project.</p>
+                        <p class="text-gray-700 mb-4">Knowing which tools to buy and which to rent can save you money and storage space. Here's a simple breakdown for this project.</p>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
                                 <h3 class="text-xl font-semibold text-emerald-700 mb-2">Tools to Buy</h3>
@@ -374,6 +594,10 @@
                                     <li>**Work Gloves & Safety Glasses:** Non-negotiable for safety.</li>
                                     <li>**Stakes, String, Line Level:** Inexpensive and useful for many DIY projects.</li>
                                 </ul>
+                                
+                                <div class="mt-4 bg-green-50 rounded-lg p-3">
+                                    <p class="text-green-700 text-sm"><i class="fas fa-dollar-sign mr-2"></i> <strong>Money Saver:</strong> Check Facebook Marketplace or local thrift stores for quality used tools at a fraction of the cost.</p>
+                                </div>
                             </div>
                             <div>
                                 <h3 class="text-xl font-semibold text-emerald-700 mb-2">Tools to Rent</h3>
@@ -382,11 +606,15 @@
                                     <li>**Garden Tiller:** Essential for breaking up large areas of compacted soil or old lawn. Rent this for the demolition phase.</li>
                                     <li>**Lawn Roller:** A water-filled drum that helps compact and settle your new topsoil. Rent this for the final grading stage.</li>
                                 </ul>
+                                
+                                <div class="mt-4 bg-green-50 rounded-lg p-3">
+                                    <p class="text-green-700 text-sm"><i class="fas fa-calendar-day mr-2"></i> <strong>Rental Tip:</strong> Rent tools for a full day even if you think you'll only need them for a few hours. This gives you buffer time and reduces stress.</p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </section>
-
+                
                 <!-- New Weeds Section -->
                 <section id="weeds" class="mt-16 max-w-4xl mx-auto">
                     <h2 class="text-3xl font-bold text-center mb-8 text-white text-shadow-custom">What About All These Weeds?</h2>
@@ -414,10 +642,14 @@
                                     </ul>
                                 </div>
                             </div>
-                             <div class="mt-4 pt-4 border-t border-gray-200 flex justify-center text-sm">
+                            
+                            <div class="mt-4 bg-blue-50 rounded-lg p-3">
+                                <p class="text-blue-700 text-sm"><i class="fas fa-info-circle mr-2"></i> <strong>Best for:</strong> If you have 2-3 months before you need to complete the project and want to improve soil quality naturally.</p>
+                            </div>
+                            
+                            <div class="mt-4 pt-4 border-t border-gray-200 flex justify-center text-sm">
                                 <a href="https://www.youtube.com/watch?v=Lfv0T9yFiIQ" target="_blank" class="flex items-center text-emerald-600 hover:text-emerald-800 font-medium">
-                                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
-                                    Watch Tutorial: Sheet Mulching
+                                    <i class="fab fa-youtube mr-2"></i> Watch Tutorial: Sheet Mulching
                                 </a>
                             </div>
                         </div>
@@ -442,16 +674,20 @@
                                     </ul>
                                 </div>
                             </div>
-                             <div class="mt-4 pt-4 border-t border-gray-200 flex justify-center text-sm">
+                            
+                            <div class="mt-4 bg-blue-50 rounded-lg p-3">
+                                <p class="text-blue-700 text-sm"><i class="fas fa-info-circle mr-2"></i> <strong>Best for:</strong> If you want to complete the project quickly and are comfortable using chemical solutions.</p>
+                            </div>
+                            
+                            <div class="mt-4 pt-4 border-t border-gray-200 flex justify-center text-sm">
                                 <a href="https://www.youtube.com/watch?v=Uib6LozeD48" target="_blank" class="flex items-center text-emerald-600 hover:text-emerald-800 font-medium">
-                                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
-                                    Watch Tutorial: Using Herbicide
+                                    <i class="fab fa-youtube mr-2"></i> Watch Tutorial: Using Herbicide
                                 </a>
                             </div>
                         </div>
                     </div>
                 </section>
-
+                
                 <!-- New Project Order Section -->
                 <section id="fence" class="mt-16 max-w-4xl mx-auto">
                     <h2 class="text-3xl font-bold text-center mb-8 text-white text-shadow-custom">Project Order: Level First or Fence First?</h2>
@@ -463,10 +699,11 @@
                             <li>**Establish Final Grade:** You can set the final, correct height and slope of your entire property. This means your fence posts will be set into ground that won't change later.</li>
                             <li>**Simpler Fence Installation:** Building a fence on ground that is already graded is much more straightforward than trying to build on a slope. You'll have a consistent base to work from.</li>
                         </ul>
-                        <h3 class="text-xl font-semibold text-emerald-700 mt-6 mb-2">The Main Consideration</h3>
-                        <ul class="list-disc list-inside text-gray-600 space-y-2">
-                            <li>You must be careful not to damage your newly leveled yard during the fence installation. We'll cover tips for that in the next section!</li>
-                        </ul>
+                        
+                        <div class="mt-4 bg-yellow-50 rounded-lg p-4">
+                            <h4 class="font-medium text-yellow-800 mb-2"><i class="fas fa-exclamation-triangle mr-2"></i> Important Consideration</h4>
+                            <p class="text-yellow-700 text-sm">You must be careful not to damage your newly leveled yard during the fence installation. We'll cover tips for that in the next section!</p>
+                        </div>
                     </div>
                 </section>
                 
@@ -481,15 +718,20 @@
                             <li>**Dig Post Holes Carefully:** When you dig your post holes, place the excavated dirt onto a tarp, not directly on the ground. This makes cleanup much easier and keeps your yard tidy.</li>
                             <li>**Wait for Seeding:** Do not plant grass or jasmine until after the fence is completely finished. The final step of your entire project should be planting.</li>
                         </ul>
+                        
+                        <div class="mt-6 bg-emerald-50 rounded-lg p-4">
+                            <h4 class="font-medium text-emerald-800 mb-2"><i class="fas fa-lightbulb mr-2"></i> Pro Tip</h4>
+                            <p class="text-emerald-700 text-sm">Mark the fence line with string and stakes before you start digging. This helps ensure your fence will be perfectly straight and positioned exactly where you want it.</p>
+                        </div>
+                        
                         <div class="mt-6 pt-6 border-t border-gray-200 flex justify-center text-sm">
                            <a href="https://www.youtube.com/watch?v=wu3WJPWvpnI" target="_blank" class="flex items-center text-emerald-600 hover:text-emerald-800 font-medium">
-                               <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
-                               Watch Tutorial: How to Build a Fence
+                               <i class="fab fa-youtube mr-2"></i> Watch Tutorial: How to Build a Fence
                            </a>
                        </div>
                     </div>
                 </section>
-
+                
                 <!-- New Portland Rules Section -->
                 <section id="portland-rules" class="mt-16 max-w-4xl mx-auto">
                     <h2 class="text-3xl font-bold text-center mb-8 text-white text-shadow-custom">Fence Rules for Portland, OR</h2>
@@ -510,19 +752,23 @@
                             <li>**Side & Rear Yards:** In the side and rear setbacks, fences can be up to **8 feet** tall (though a permit is needed over 7 feet for wood).</li>
                             <li>**Property Lines:** All parts of your fence, including the concrete footings, must be entirely on your own property. It's a good idea to locate your property pins before building.</li>
                         </ul>
+                        
+                        <div class="mt-4 bg-blue-50 rounded-lg p-4">
+                            <h4 class="font-medium text-blue-800 mb-2"><i class="fas fa-info-circle mr-2"></i> Important Note</h4>
+                            <p class="text-blue-700 text-sm">Homeowners associations (HOAs) often have their own fence rules that may be stricter than city codes. If you're in an HOA, check their guidelines before building.</p>
+                        </div>
+                        
                         <div class="mt-6 pt-6 border-t border-gray-200 flex flex-col sm:flex-row justify-around text-sm space-y-3 sm:space-y-0">
                            <a href="https://www.portland.gov/ppd/residential-permitting/residential-projects/fence-permits" target="_blank" class="flex items-center text-emerald-600 hover:text-emerald-800 font-medium">
-                               <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path><path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.03 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"></path></svg>
-                               Official Fence Permit Page
+                               <i class="fas fa-external-link-alt mr-2"></i> Official Fence Permit Page
                            </a>
                            <a href="https://www.portland.gov/ppd/residential-permitting/b3-residential-fences-decks-outdoor-projects" target="_blank" class="flex items-center text-emerald-600 hover:text-emerald-800 font-medium">
-                               <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path><path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.03 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"></path></svg>
-                               City Brochure on Fences & Decks
+                               <i class="fas fa-file-alt mr-2"></i> City Brochure on Fences & Decks
                            </a>
                        </div>
                     </div>
                 </section>
-
+                
                 <!-- New Jasmine Section -->
                 <section id="jasmine" class="mt-16 max-w-4xl mx-auto">
                     <h2 class="text-3xl font-bold text-center mb-8 text-white text-shadow-custom">A Note on Planting Jasmine for Privacy</h2>
@@ -530,6 +776,12 @@
                         <p class="text-gray-700 mb-4">Planning to cover that new fence with beautiful, fragrant jasmine is a brilliant final touch! Thinking about it now will set you up for success.</p>
                         <h3 class="text-xl font-semibold text-emerald-700 mb-2">When to Plant?</h3>
                         <p class="text-gray-600 mb-4">You should plant your jasmine **after** the fence is installed and **after** the main leveling and grading is complete. This protects the young plants from being damaged during construction and ensures the soil level around them is final.</p>
+                        
+                        <div class="mt-4 bg-green-50 rounded-lg p-4">
+                            <h4 class="font-medium text-green-800 mb-2"><i class="fas fa-seedling mr-2"></i> Planting Timeline</h4>
+                            <p class="text-green-700 text-sm">For best results, plant jasmine in early spring or fall when temperatures are mild. This gives the plants time to establish their root systems before facing summer heat or winter cold.</p>
+                        </div>
+                        
                         <h3 class="text-xl font-semibold text-emerald-700 mt-6 mb-2">Choosing the Right Jasmine:</h3>
                         <ul class="list-disc list-inside text-gray-600 space-y-2">
                             <li>**For thick privacy:** Look for a vigorous, evergreen variety like Star Jasmine (Trachelospermum jasminoides). It's not a true jasmine, but it's a fast-growing, dense vine with fragrant white flowers that's perfect for creating a living wall.</li>
@@ -540,15 +792,15 @@
                             <li>**Enrich the soil:** When you dig the holes for your jasmine plants (along the new fence line), mix a generous amount of compost into the soil you removed. This will give the roots the nutrients they need to get established quickly.</li>
                             <li>**Give them space:** Plant them about 5 feet apart to give each plant room to grow and spread out. They will fill in the gaps surprisingly fast!</li>
                         </ul>
+                        
                         <div class="mt-6 pt-6 border-t border-gray-200 flex justify-center text-sm">
                            <a href="https://www.youtube.com/watch?v=qQmSxWB_LDU" target="_blank" class="flex items-center text-emerald-600 hover:text-emerald-800 font-medium">
-                               <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
-                               Watch Tutorial: Planting & Training Vines
+                               <i class="fab fa-youtube mr-2"></i> Watch Tutorial: Planting & Training Vines
                            </a>
                        </div>
                     </div>
                 </section>
-
+                
                 <!-- New After Leveling Section -->
                 <section id="after-leveling" class="mt-16 max-w-4xl mx-auto">
                     <h2 class="text-3xl font-bold text-center mb-8 text-white text-shadow-custom">What Comes After Leveling?</h2>
@@ -556,20 +808,41 @@
                         <p class="text-gray-700 mb-4">Once the ground is level and your fence is up, you're ready for the fun part: creating your new lawn! Here's what to think about.</p>
                         <h3 class="text-xl font-semibold text-emerald-700 mb-2">Seeding vs. Sod</h3>
                         <p class="text-gray-600 mb-3">You have two main choices for establishing your new lawn.</p>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6">
-                            <div>
-                                <h4 class="font-semibold text-gray-800">Grass Seed</h4>
-                                <p class="text-gray-600 text-sm">Less expensive and offers more grass varieties, but requires more patience and consistent watering to establish.</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <h4 class="font-semibold text-gray-800 mb-2">Grass Seed</h4>
+                                <p class="text-gray-600 text-sm mb-3">Less expensive and offers more grass varieties, but requires more patience and consistent watering to establish.</p>
+                                <div class="text-sm">
+                                    <p class="font-medium text-emerald-700 mb-1">Best for:</p>
+                                    <ul class="list-disc list-inside text-gray-600 text-xs">
+                                        <li>Budget-conscious projects</li>
+                                        <li>Areas with less foot traffic</li>
+                                        <li>When you have time to wait</li>
+                                    </ul>
+                                </div>
                             </div>
-                            <div>
-                                <h4 class="font-semibold text-gray-800">Sod</h4>
-                                <p class="text-gray-600 text-sm">Gives you an "instant lawn" and is great at preventing initial weed growth, but it's significantly more expensive and physically demanding to install.</p>
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <h4 class="font-semibold text-gray-800 mb-2">Sod</h4>
+                                <p class="text-gray-600 text-sm mb-3">Gives you an "instant lawn" and is great at preventing initial weed growth, but it's significantly more expensive and physically demanding to install.</p>
+                                <div class="text-sm">
+                                    <p class="font-medium text-emerald-700 mb-1">Best for:</p>
+                                    <ul class="list-disc list-inside text-gray-600 text-xs">
+                                        <li>Immediate results needed</li>
+                                        <li>Areas with heavy foot traffic</li>
+                                        <li>Steep slopes (prevents erosion)</li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
+                        
+                        <div class="mt-6 bg-emerald-50 rounded-lg p-4">
+                            <h4 class="font-medium text-emerald-800 mb-2"><i class="fas fa-lightbulb mr-2"></i> Hybrid Approach</h4>
+                            <p class="text-emerald-700 text-sm">Consider using sod for high-visibility or high-traffic areas (like right by the patio) and seed for the rest of the yard. This gives you the best of both worlds—immediate impact where it matters most and cost savings elsewhere.</p>
+                        </div>
+                        
                         <div class="mt-6 pt-6 border-t border-gray-200 flex justify-center text-sm">
                            <a href="https://www.youtube.com/watch?v=kX_b8_xO5-0" target="_blank" class="flex items-center text-emerald-600 hover:text-emerald-800 font-medium">
-                               <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
-                               Watch Tutorial: Seed vs. Sod
+                               <i class="fab fa-youtube mr-2"></i> Watch Tutorial: Seed vs. Sod
                            </a>
                        </div>
                     </div>
@@ -584,21 +857,32 @@
                             <div>
                                 <h3 class="text-xl font-semibold text-emerald-700 mb-2">Nurseries for Jasmine & Plants</h3>
                                 <ul class="list-disc list-inside text-gray-600 space-y-2">
-                                    <li><a href="https://www.portlandnursery.com/" target="_blank" class="text-emerald-600 hover:underline">Portland Nursery</a></li>
-                                    <li><a href="https://www.pistilsnursery.com/" target="_blank" class="text-emerald-600 hover:underline">Pistils Nursery</a></li>
+                                    <li><a href="https://www.portlandnursery.com/" target="_blank" class="text-emerald-600 hover:underline">Portland Nursery</a> - Knowledgeable staff and wide selection</li>
+                                    <li><a href="https://www.pistilsnursery.com/" target="_blank" class="text-emerald-600 hover:underline">Pistils Nursery</a> - Specializes in unique plants and great advice</li>
+                                    <li><a href="https://www Cornellfarms.com/" target="_blank" class="text-emerald-600 hover:underline">Cornell Farms</a> - Family-owned with excellent service</li>
                                 </ul>
                             </div>
                              <div>
                                 <h3 class="text-xl font-semibold text-emerald-700 mb-2">Tool & Equipment Rental</h3>
                                 <ul class="list-disc list-inside text-gray-600 space-y-2">
-                                    <li><a href="https://www.sunbeltrentals.com/" target="_blank" class="text-emerald-600 hover:underline">Sunbelt Rentals</a></li>
-                                    <li><a href="https://www.parkrosehardware.com/rentals" target="_blank" class="text-emerald-600 hover:underline">Parkrose Hardware</a></li>
+                                    <li><a href="https://www.sunbeltrentals.com/" target="_blank" class="text-emerald-600 hover:underline">Sunbelt Rentals</a> - Multiple locations, wide selection</li>
+                                    <li><a href="https://www.parkrosehardware.com/rentals" target="_blank" class="text-emerald-600 hover:underline">Parkrose Hardware</a> - Local option with friendly service</li>
+                                    <li><a href="https://www.unitedrentals.com/" target="_blank" class="text-emerald-600 hover:underline">United Rentals</a> - Professional-grade equipment</li>
                                 </ul>
                             </div>
                         </div>
+                        
+                        <div class="mt-6 pt-6 border-t border-gray-200">
+                            <h3 class="text-xl font-semibold text-emerald-700 mb-2">Soil & Material Suppliers</h3>
+                            <ul class="list-disc list-inside text-gray-600 space-y-2">
+                                <li><a href="https://www.mtscottfuel.com/" target="_blank" class="text-emerald-600 hover:underline">Mt. Scott Fuel & Garden Supply</a> - Quality soil blends and delivery service</li>
+                                <li><a href="https://www.portlandsandandgravel.com/" target="_blank" class="text-emerald-600 hover:underline">Portland Sand & Gravel</a> - Specializes in garden soils and compost</li>
+                                <li><a href="https://www.fineroutdoorliving.com/" target="_blank" class="text-emerald-600 hover:underline">Fine Outdoor Living</a> - Sand, gravel, and landscape materials</li>
+                            </ul>
+                        </div>
                     </div>
                 </section>
-
+                
                 <!-- New Celebrating Milestones Section -->
                 <section id="celebrate" class="mt-16 max-w-4xl mx-auto">
                     <h2 class="text-3xl font-bold text-center mb-8 text-white text-shadow-custom">Celebrating Milestones: The Fun Part!</h2>
@@ -610,18 +894,79 @@
                             <li><strong>After the fence is built:</strong> Your privacy and security are established. This is a huge milestone worth celebrating with friends or family.</li>
                             <li><strong>After planting:</strong> The final vision is coming to life! Take lots of photos and get excited for everything to grow.</li>
                         </ul>
+                        
+                        <div class="mt-6 bg-purple-50 rounded-lg p-4">
+                            <h4 class="font-medium text-purple-800 mb-2"><i class="fas fa-gift mr-2"></i> Celebration Ideas</h4>
+                            <ul class="list-disc list-inside text-purple-700 text-sm space-y-1">
+                                <li>Have a small picnic in the newly cleared space</li>
+                                <li>Take "progress" photos and compare them to your "before" shots</li>
+                                <li>Treat yourself to a new garden decoration for each milestone</li>
+                                <li>Plan a future garden party to look forward to when everything is complete</li>
+                            </ul>
+                        </div>
                     </div>
                 </section>
-
+                
+                <!-- New Daily Progress Section -->
+                <section id="daily-progress" class="mt-16 max-w-4xl mx-auto">
+                    <h2 class="text-3xl font-bold text-center mb-8 text-white text-shadow-custom">Making Daily Progress</h2>
+                    <div class="bg-white p-8 rounded-xl shadow-md">
+                        <p class="text-gray-700 mb-4">Big projects are completed through small, consistent efforts. Here's how to make meaningful progress without burning out:</p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="bg-emerald-50 p-5 rounded-lg">
+                                <h3 class="text-lg font-semibold text-emerald-800 mb-3"><i class="fas fa-clock mr-2"></i> The 15-Minute Rule</h3>
+                                <p class="text-emerald-700 text-sm">On days you have no energy or motivation, commit to just 15 minutes of work. Often, once you start, you'll find the energy to continue. If not, you still made progress!</p>
+                            </div>
+                            
+                            <div class="bg-blue-50 p-5 rounded-lg">
+                                <h3 class="text-lg font-semibold text-blue-800 mb-3"><i class="fas fa-tasks mr-2"></i> The One-Square Method</h3>
+                                <p class="text-blue-700 text-sm">Focus on just one small square area at a time. Mark off a 5x5 foot section and complete it before moving to the next. This makes the project feel much more manageable.</p>
+                            </div>
+                            
+                            <div class="bg-yellow-50 p-5 rounded-lg">
+                                <h3 class="text-lg font-semibold text-yellow-800 mb-3"><i class="fas fa-calendar-check mr-2"></i> The Three-Day Rule</h3>
+                                <p class="text-yellow-700 text-sm">Work for three consecutive days, then take one day off completely. This creates momentum while preventing burnout. The off day gives your body time to recover.</p>
+                            </div>
+                            
+                            <div class="bg-purple-50 p-5 rounded-lg">
+                                <h3 class="text-lg font-semibold text-purple-800 mb-3"><i class="fas fa-camera mr-2"></i> The Photo Journal</h3>
+                                <p class="text-purple-700 text-sm">Take a photo at the end of each workday, even if progress seems small. Looking back at these photos will show you how much you've accomplished and keep you motivated.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 bg-gray-50 rounded-lg p-4">
+                            <h4 class="font-medium text-gray-800 mb-2"><i class="fas fa-quote-left mr-2"></i> Remember This</h4>
+                            <p class="text-gray-700 text-sm">This project is a journey, not a race. Every small effort adds up. Even on days when you feel you've accomplished little, you're still moving forward. Be proud of your consistency!</p>
+                        </div>
+                    </div>
+                </section>
             </main>
-
+            
             <!-- Footer -->
             <footer class="text-center mt-16 py-8 border-t border-transparent">
                 <p class="text-white bg-black/20 rounded-full px-4 py-2 inline-block text-shadow-custom">Great work, Staci! Take your time, trust the process, and get ready to enjoy your beautiful new backyard.</p>
+                
+                <div class="mt-6 flex justify-center space-x-4">
+                    <a href="#motivation" class="text-white hover:text-emerald-200 transition">
+                        <i class="fas fa-arrow-up"></i> Back to Top
+                    </a>
+                </div>
             </footer>
-
         </div>
     </div>
+    
+    <!-- Motivational Popup -->
+    <div id="motivationPopup" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-xl p-8 max-w-md mx-4">
+            <h3 class="text-2xl font-bold text-emerald-700 mb-4">You've Got This!</h3>
+            <p id="motivationText" class="text-gray-700 mb-6"></p>
+            <button id="closeMotivation" class="bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-2 px-4 rounded-lg transition">
+                Thanks! I needed that.
+            </button>
+        </div>
+    </div>
+
     <script>
         // JavaScript for the soil calculator
         const calculateBtn = document.getElementById('calculateBtn');
@@ -629,12 +974,11 @@
         const lengthInput = document.getElementById('length');
         const widthInput = document.getElementById('width');
         const depthInput = document.getElementById('depth');
-
+        
         calculateBtn.addEventListener('click', () => {
             const length = parseFloat(lengthInput.value);
             const width = parseFloat(widthInput.value);
             const depth = parseFloat(depthInput.value);
-
             if (isNaN(length) || isNaN(width) || isNaN(depth) || length <= 0 || width <= 0 || depth <= 0) {
                 resultDiv.textContent = 'Please enter valid numbers in all fields.';
                 resultDiv.classList.add('text-red-500');
@@ -642,14 +986,84 @@
             }
             
             resultDiv.classList.remove('text-red-500');
-
             // Calculate volume in cubic feet
             const volumeCubicFeet = length * width * (depth / 12);
             // Convert cubic feet to cubic yards (1 cubic yard = 27 cubic feet)
             const volumeCubicYards = volumeCubicFeet / 27;
-
-            resultDiv.textContent = `You need approximately ${volumeCubicYards.toFixed(2)} cubic yards of soil.`;
+            resultDiv.innerHTML = `<i class="fas fa-check-circle mr-2"></i> You need approximately <strong>${volumeCubicYards.toFixed(2)} cubic yards</strong> of soil.`;
         });
+        
+        // Progress bar functionality
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('progressBar').style.width = scrolled + '%';
+        });
+        
+        // Progress tracker functionality
+        const checkboxes = document.querySelectorAll('.checklist-item input[type="checkbox"]');
+        const progressCount = document.getElementById('progressCount');
+        const progressBarInner = document.getElementById('progressBarInner');
+        
+        function updateProgress() {
+            let checkedCount = 0;
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    checkedCount++;
+                    checkbox.closest('.checklist-item').classList.add('checked');
+                } else {
+                    checkbox.closest('.checklist-item').classList.remove('checked');
+                }
+            });
+            
+            progressCount.textContent = checkedCount;
+            const percentage = (checkedCount / checkboxes.length) * 100;
+            progressBarInner.style.width = percentage + '%';
+        }
+        
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', updateProgress);
+        });
+        
+        // Motivational quotes
+        const motivationalQuotes = [
+            "The secret of getting ahead is getting started. - Mark Twain",
+            "It does not matter how slowly you go as long as you do not stop. - Confucius",
+            "Your limitation—it's only your imagination.",
+            "Great things never come from comfort zones.",
+            "Dream it. Wish it. Do it.",
+            "Success doesn't just find you. You have to go out and get it.",
+            "The harder you work for something, the greater you'll feel when you achieve it.",
+            "Don't stop when you're tired. Stop when you're done.",
+            "Wake up with determination. Go to bed with satisfaction.",
+            "Do something today that your future self will thank you for."
+        ];
+        
+        // Motivational popup functionality
+        const motivationBtn = document.getElementById('motivationBtn');
+        const motivationPopup = document.getElementById('motivationPopup');
+        const motivationText = document.getElementById('motivationText');
+        const closeMotivation = document.getElementById('closeMotivation');
+        
+        motivationBtn.addEventListener('click', () => {
+            const randomQuote = motivationalQuotes[Math.floor(Math.random() * motivationalQuotes.length)];
+            motivationText.textContent = randomQuote;
+            motivationPopup.classList.remove('hidden');
+        });
+        
+        closeMotivation.addEventListener('click', () => {
+            motivationPopup.classList.add('hidden');
+        });
+        
+        motivationPopup.addEventListener('click', (e) => {
+            if (e.target === motivationPopup) {
+                motivationPopup.classList.add('hidden');
+            }
+        });
+        
+        // Initialize progress on page load
+        updateProgress();
     </script>
 </body>
 </html>
