@@ -131,6 +131,304 @@
             display: none !important;
             visibility: hidden !important;
         }
+        
+        /* Gamification Styles */
+        .badges-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+        
+        .badge {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100px;
+            cursor: pointer;
+        }
+        
+        .badge-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            background-color: #f3f4f6;
+            color: #9ca3af;
+            border: 2px solid #e5e7eb;
+            transition: all 0.3s ease;
+        }
+        
+        .badge-icon:hover {
+            transform: scale(1.05);
+        }
+        
+        .badge-icon.earned {
+            background-color: #d1fae5;
+            color: #065f46;
+            border-color: #10b981;
+            box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.3);
+        }
+        
+        .badge-name {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #6b7280;
+            text-align: center;
+            line-height: 1.2;
+        }
+        
+        .badge-name.earned {
+            color: #065f46;
+            font-weight: 600;
+        }
+        
+        .milestone-btn {
+            background-color: #f3f4f6;
+            color: #6b7280;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .milestone-btn:hover {
+            background-color: #e5e7eb;
+            transform: translateY(-1px);
+        }
+        
+        .milestone-btn.earned {
+            background-color: #d1fae5;
+            color: #065f46;
+            border-color: #10b981;
+        }
+        
+        .milestone-btn.earned:hover {
+            background-color: #a7f3d0;
+        }
+        
+        .notification {
+            position: fixed;
+            bottom: 100px;
+            right: 20px;
+            background-color: #10b981;
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            z-index: 1000;
+            transform: translateX(150%);
+            transition: transform 0.3s ease-in-out;
+            max-width: 300px;
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+        }
+        
+        .notification-title {
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+            font-size: 1.1rem;
+        }
+        
+        .notification-close {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 1.2rem;
+            opacity: 0.7;
+        }
+        
+        .notification-close:hover {
+            opacity: 1;
+        }
+        
+        /* Game Styles */
+        #gameContainer {
+            position: relative;
+            width: 800px;
+            max-width: 100%;
+            height: 500px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            margin: 0 auto;
+        }
+        
+        #gameCanvas {
+            background: linear-gradient(to bottom, #87CEEB, #E0F7FA);
+            display: block;
+            border-radius: 15px;
+        }
+        
+        #gameUI {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-sizing: border-box;
+            pointer-events: none;
+        }
+        
+        #score {
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        #highScore {
+            font-size: 18px;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        #gameOverScreen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 15px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        
+        #gameOverScreen.show {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        #gameOverText {
+            font-size: 48px;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
+        }
+        
+        #finalScore {
+            font-size: 32px;
+            color: white;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+        
+        #restartButton {
+            padding: 15px 30px;
+            font-size: 20px;
+            font-weight: bold;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transition: transform 0.2s, background-color 0.2s;
+        }
+        
+        #restartButton:hover {
+            background-color: #45a049;
+            transform: scale(1.05);
+        }
+        
+        #startScreen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 15px;
+            transition: opacity 0.3s ease;
+        }
+        
+        #startScreen.hide {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        #gameTitle {
+            font-size: 56px;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
+        }
+        
+        #instructions {
+            font-size: 22px;
+            color: white;
+            margin-bottom: 40px;
+            text-align: center;
+            max-width: 80%;
+            line-height: 1.5;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+        
+        #startButton {
+            padding: 15px 30px;
+            font-size: 24px;
+            font-weight: bold;
+            background-color: #FF9800;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transition: transform 0.2s, background-color 0.2s;
+        }
+        
+        #startButton:hover {
+            background-color: #F57C00;
+            transform: scale(1.05);
+        }
+        
+        @media (max-width: 800px) {
+            #gameContainer {
+                height: 70vh;
+            }
+            
+            #gameTitle {
+                font-size: 42px;
+            }
+            
+            #instructions {
+                font-size: 18px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -141,7 +439,6 @@
     <div class="fab" id="motivationBtn" title="Need motivation?">
         <i class="fas fa-heart"></i>
     </div>
-
     <!-- On desktop, this has a transparent background. On mobile, it gets the background image. -->
     <div class="content-wrapper bg-gray-50/95 lg:bg-transparent min-h-screen">
         <div class="container mx-auto p-4 sm:p-6 lg:p-8">
@@ -190,6 +487,14 @@
                             <h4 class="font-medium text-yellow-800 mb-2"><i class="fas fa-clock mr-2"></i> 15-Minute Rule</h4>
                             <p class="text-yellow-700 text-sm">On days you feel zero motivation, commit to just 15 minutes of work. Often, once you start, you'll find the energy to continue. If not, you still made progress!</p>
                         </div>
+                        
+                        <!-- Photo Journal Badge Button -->
+                        <div class="mt-6 text-center">
+                            <button id="photoJournalBtn" class="milestone-btn">
+                                <i class="fas fa-camera"></i>
+                                <span>I've Taken Before & After Photos</span>
+                            </button>
+                        </div>
                     </div>
                 </section>
                 
@@ -228,6 +533,55 @@
                                 <div id="progressBarInner" class="bg-emerald-600 h-2.5 rounded-full" style="width: 0%"></div>
                             </div>
                         </div>
+                        
+                        <!-- Badges Section -->
+                        <div class="mt-8">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-4 text-center">Achievement Badges</h3>
+                            <div class="badges-container">
+                                <div class="badge" id="badgeWeedContainer">
+                                    <div class="badge-icon" id="badgeWeed">
+                                        <i class="fas fa-cut"></i>
+                                    </div>
+                                    <div class="badge-name" id="badgeWeedName">Weed Warrior</div>
+                                </div>
+                                <div class="badge" id="badgeStakeContainer">
+                                    <div class="badge-icon" id="badgeStake">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                    </div>
+                                    <div class="badge-name" id="badgeStakeName">Stakeholder</div>
+                                </div>
+                                <div class="badge" id="badgeSoilContainer">
+                                    <div class="badge-icon" id="badgeSoil">
+                                        <i class="fas fa-vial"></i>
+                                    </div>
+                                    <div class="badge-name" id="badgeSoilName">Soil Scientist</div>
+                                </div>
+                                <div class="badge" id="badgePhotoContainer">
+                                    <div class="badge-icon" id="badgePhoto">
+                                        <i class="fas fa-camera"></i>
+                                    </div>
+                                    <div class="badge-name" id="badgePhotoName">Before & After Boss</div>
+                                </div>
+                                <div class="badge" id="badgeGradingContainer">
+                                    <div class="badge-icon" id="badgeGrading">
+                                        <i class="fas fa-ruler-combined"></i>
+                                    </div>
+                                    <div class="badge-name" id="badgeGradingName">Grading Guru</div>
+                                </div>
+                                <div class="badge" id="badgeSlopeContainer">
+                                    <div class="badge-icon" id="badgeSlope">
+                                        <i class="fas fa-mountain"></i>
+                                    </div>
+                                    <div class="badge-name" id="badgeSlopeName">Slope Sensei</div>
+                                </div>
+                                <div class="badge" id="badgePlanContainer">
+                                    <div class="badge-icon" id="badgePlan">
+                                        <i class="fas fa-clipboard-list"></i>
+                                    </div>
+                                    <div class="badge-name" id="badgePlanName">Plan Master</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </section>
                 
@@ -263,6 +617,14 @@
                         <div class="mt-6 bg-purple-50 rounded-lg p-4">
                             <h4 class="font-medium text-purple-800 mb-2"><i class="fas fa-calendar-alt mr-2"></i> Pacing Yourself</h4>
                             <p class="text-purple-700 text-sm">Remember, this timeline is just a guide! It's perfectly fine to take longer. The goal is steady progress, not burnout. Some weekends you might accomplish more, others less—that's completely normal.</p>
+                        </div>
+                        
+                        <!-- Plan Master Badge Button -->
+                        <div class="mt-6 text-center">
+                            <button id="planBtn" class="milestone-btn">
+                                <i class="fas fa-clipboard-list"></i>
+                                <span>I've Created My Leveling Plan</span>
+                            </button>
                         </div>
                     </div>
                 </section>
@@ -395,6 +757,13 @@
                                         <li>**This Weekend:** Run your first string line between two stakes.</li>
                                         <li>**Next Step:** Add the rest of the stakes for just one row of your grid.</li>
                                     </ul>
+                                    <!-- Stakeholder Badge Button -->
+                                    <div class="mt-3 text-center">
+                                        <button id="stakeholderBtn" class="milestone-btn">
+                                            <i class="fas fa-map-marker-alt"></i>
+                                            <span>I've Mapped My Slope</span>
+                                        </button>
+                                    </div>
                                 </details>
                             </div>
                             <div class="mt-4 pt-4 border-t border-gray-200 flex justify-around text-sm">
@@ -531,6 +900,13 @@
                                         <li>**This Weekend:** Use the back of the rake to do the final grading on that same section.</li>
                                         <li>**Next Step:** Pick another section and repeat. Small chunks are key!</li>
                                     </ul>
+                                    <!-- Grading Guru Badge Button -->
+                                    <div class="mt-3 text-center">
+                                        <button id="gradingBtn" class="milestone-btn">
+                                            <i class="fas fa-ruler-combined"></i>
+                                            <span>I've Leveled a Section</span>
+                                        </button>
+                                    </div>
                                 </details>
                             </div>
                             <div class="mt-4 pt-4 border-t border-gray-200 flex justify-around text-sm">
@@ -565,6 +941,13 @@
                                         <li>**This Weekend:** Give the whole yard a light, even watering.</li>
                                         <li>**Next Step:** Wait a day or two and look for any new puddles or low spots that appear.</li>
                                     </ul>
+                                    <!-- Slope Sensei Badge Button -->
+                                    <div class="mt-3 text-center">
+                                        <button id="slopeBtn" class="milestone-btn">
+                                            <i class="fas fa-mountain"></i>
+                                            <span>I've Mastered the Slope</span>
+                                        </button>
+                                    </div>
                                 </details>
                             </div>
                             <div class="mt-4 pt-4 border-t border-gray-200 flex justify-around text-sm">
@@ -941,6 +1324,44 @@
                         </div>
                     </div>
                 </section>
+                
+                <!-- New Game Break Section -->
+                <section id="game-break" class="mt-16 max-w-4xl mx-auto">
+                    <h2 class="text-3xl font-bold text-center mb-8 text-white text-shadow-custom">Take a Fun Break!</h2>
+                    <div class="bg-white p-8 rounded-xl shadow-md">
+                        <p class="text-gray-700 mb-6 text-center">
+                            Remember, it's important to take breaks and rest during big projects. 
+                            A little fun can recharge your batteries and keep you motivated. 
+                            Take a few minutes to play this cute bunny game and then get back to your yard with fresh energy!
+                        </p>
+                        <div class="flex justify-center">
+                           <div id="gameContainer">
+                                <canvas id="gameCanvas" width="800" height="500"></canvas>
+                                
+                                <div id="gameUI">
+                                    <div id="score">Score: 0</div>
+                                    <div id="highScore">High Score: 0</div>
+                                </div>
+                                
+                                <div id="startScreen">
+                                    <div id="gameTitle">Bunny Hopper</div>
+                                    <div id="instructions">
+                                        Help the bunny hop over the giant carrots!<br>
+                                        Press SPACEBAR or TAP/CLICK to jump<br>
+                                        Avoid the carrots and see how far you can go!
+                                    </div>
+                                    <button id="startButton">Start Game</button>
+                                </div>
+                                
+                                <div id="gameOverScreen">
+                                    <div id="gameOverText">Game Over!</div>
+                                    <div id="finalScore">Your Score: 0</div>
+                                    <button id="restartButton">Play Again</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </main>
             
             <!-- Footer -->
@@ -966,9 +1387,16 @@
             </button>
         </div>
     </div>
-
+    
+    <!-- Notification for badges -->
+    <div id="notification" class="notification">
+        <button class="notification-close">&times;</button>
+        <div class="notification-title" id="notificationTitle"></div>
+        <div id="notificationMessage"></div>
+    </div>
+    
     <script>
-        // JavaScript for the soil calculator
+        // Website JavaScript
         const calculateBtn = document.getElementById('calculateBtn');
         const resultDiv = document.getElementById('result');
         const lengthInput = document.getElementById('length');
@@ -1006,6 +1434,56 @@
         const progressCount = document.getElementById('progressCount');
         const progressBarInner = document.getElementById('progressBarInner');
         
+        // Badge elements
+        const badgeWeed = document.getElementById('badgeWeed');
+        const badgeWeedName = document.getElementById('badgeWeedName');
+        const badgeStake = document.getElementById('badgeStake');
+        const badgeStakeName = document.getElementById('badgeStakeName');
+        const badgeSoil = document.getElementById('badgeSoil');
+        const badgeSoilName = document.getElementById('badgeSoilName');
+        const badgePhoto = document.getElementById('badgePhoto');
+        const badgePhotoName = document.getElementById('badgePhotoName');
+        const badgeGrading = document.getElementById('badgeGrading');
+        const badgeGradingName = document.getElementById('badgeGradingName');
+        const badgeSlope = document.getElementById('badgeSlope');
+        const badgeSlopeName = document.getElementById('badgeSlopeName');
+        const badgePlan = document.getElementById('badgePlan');
+        const badgePlanName = document.getElementById('badgePlanName');
+        
+        // Badge container elements for click events
+        const badgeWeedContainer = document.getElementById('badgeWeedContainer');
+        const badgeStakeContainer = document.getElementById('badgeStakeContainer');
+        const badgeSoilContainer = document.getElementById('badgeSoilContainer');
+        const badgePhotoContainer = document.getElementById('badgePhotoContainer');
+        const badgeGradingContainer = document.getElementById('badgeGradingContainer');
+        const badgeSlopeContainer = document.getElementById('badgeSlopeContainer');
+        const badgePlanContainer = document.getElementById('badgePlanContainer');
+        
+        // Milestone buttons
+        const stakeholderBtn = document.getElementById('stakeholderBtn');
+        const photoJournalBtn = document.getElementById('photoJournalBtn');
+        const gradingBtn = document.getElementById('gradingBtn');
+        const slopeBtn = document.getElementById('slopeBtn');
+        const planBtn = document.getElementById('planBtn');
+        
+        // Notification elements
+        const notification = document.getElementById('notification');
+        const notificationTitle = document.getElementById('notificationTitle');
+        const notificationMessage = document.getElementById('notificationMessage');
+        const notificationClose = document.querySelector('.notification-close');
+        
+        // Track earned badges
+        const earnedBadges = {
+            weedWarrior: false,
+            stakeholder: false,
+            soilScientist: false,
+            beforeAfterBoss: false,
+            gradingGuru: false,
+            slopeSensei: false,
+            planMaster: false
+        };
+        
+        // Update progress function
         function updateProgress() {
             let checkedCount = 0;
             checkboxes.forEach(checkbox => {
@@ -1020,27 +1498,169 @@
             progressCount.textContent = checkedCount;
             const percentage = (checkedCount / checkboxes.length) * 100;
             progressBarInner.style.width = percentage + '%';
+            
+            // Check for Weed Warrior badge
+            if (!earnedBadges.weedWarrior && document.getElementById('check3').checked) {
+                earnedBadges.weedWarrior = true;
+                badgeWeed.classList.add('earned');
+                badgeWeedName.classList.add('earned');
+                showNotification('Weed Warrior', 'You\'ve cleared a section of your yard!');
+            }
+            
+            // Check for Soil Scientist badge
+            if (!earnedBadges.soilScientist && document.getElementById('check5').checked) {
+                earnedBadges.soilScientist = true;
+                badgeSoil.classList.add('earned');
+                badgeSoilName.classList.add('earned');
+                showNotification('Soil Scientist', 'You\'ve performed the soil jar test!');
+            }
         }
         
+        // Add event listeners to checkboxes
         checkboxes.forEach(checkbox => {
             checkbox.addEventListener('change', updateProgress);
         });
         
+        // Show notification function
+        function showNotification(title, message) {
+            notificationTitle.textContent = title;
+            notificationMessage.textContent = message;
+            notification.classList.add('show');
+            
+            // Auto hide after 5 seconds
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 5000);
+        }
+        
+        // Close notification when X is clicked
+        notificationClose.addEventListener('click', () => {
+            notification.classList.remove('show');
+        });
+        
+        // Badge click event handlers
+        badgeWeedContainer.addEventListener('click', () => {
+            if (earnedBadges.weedWarrior) {
+                showNotification('Weed Warrior', 'You cleared a section of your yard. Great job tackling those weeds!');
+            } else {
+                showNotification('Weed Warrior', 'Complete the "Clear a small section of the yard" task to earn this badge!');
+            }
+        });
+        
+        badgeStakeContainer.addEventListener('click', () => {
+            if (earnedBadges.stakeholder) {
+                showNotification('Stakeholder', 'You mapped your slope with stakes and string. Precision is key!');
+            } else {
+                showNotification('Stakeholder', 'Click the "I\'ve Mapped My Slope" button to earn this badge!');
+            }
+        });
+        
+        badgeSoilContainer.addEventListener('click', () => {
+            if (earnedBadges.soilScientist) {
+                showNotification('Soil Scientist', 'You performed the soil jar test. Knowledge is power!');
+            } else {
+                showNotification('Soil Scientist', 'Complete the "Perform the soil jar test" task to earn this badge!');
+            }
+        });
+        
+        badgePhotoContainer.addEventListener('click', () => {
+            if (earnedBadges.beforeAfterBoss) {
+                showNotification('Before & After Boss', 'You took before and after photos. Documenting your journey is inspiring!');
+            } else {
+                showNotification('Before & After Boss', 'Click the "I\'ve Taken Before & After Photos" button to earn this badge!');
+            }
+        });
+        
+        badgeGradingContainer.addEventListener('click', () => {
+            if (earnedBadges.gradingGuru) {
+                showNotification('Grading Guru', 'You leveled a section of your yard. Your hard work is paying off!');
+            } else {
+                showNotification('Grading Guru', 'Click the "I\'ve Leveled a Section" button to earn this badge!');
+            }
+        });
+        
+        badgeSlopeContainer.addEventListener('click', () => {
+            if (earnedBadges.slopeSensei) {
+                showNotification('Slope Sensei', 'You mastered the slope! Your yard is perfectly graded.');
+            } else {
+                showNotification('Slope Sensei', 'Click the "I\'ve Mastered the Slope" button to earn this badge!');
+            }
+        });
+        
+        badgePlanContainer.addEventListener('click', () => {
+            if (earnedBadges.planMaster) {
+                showNotification('Plan Master', 'You created a leveling plan. Planning leads to success!');
+            } else {
+                showNotification('Plan Master', 'Click the "I\'ve Created My Leveling Plan" button to earn this badge!');
+            }
+        });
+        
+        // Milestone button event handlers
+        stakeholderBtn.addEventListener('click', () => {
+            if (!earnedBadges.stakeholder) {
+                earnedBadges.stakeholder = true;
+                badgeStake.classList.add('earned');
+                badgeStakeName.classList.add('earned');
+                stakeholderBtn.classList.add('earned');
+                showNotification('Stakeholder', 'You\'ve mapped your slope with stakes and string!');
+            }
+        });
+        
+        photoJournalBtn.addEventListener('click', () => {
+            if (!earnedBadges.beforeAfterBoss) {
+                earnedBadges.beforeAfterBoss = true;
+                badgePhoto.classList.add('earned');
+                badgePhotoName.classList.add('earned');
+                photoJournalBtn.classList.add('earned');
+                showNotification('Before & After Boss', 'You\'ve taken before and after photos!');
+            }
+        });
+        
+        gradingBtn.addEventListener('click', () => {
+            if (!earnedBadges.gradingGuru) {
+                earnedBadges.gradingGuru = true;
+                badgeGrading.classList.add('earned');
+                badgeGradingName.classList.add('earned');
+                gradingBtn.classList.add('earned');
+                showNotification('Grading Guru', 'You\'ve leveled a section of your yard!');
+            }
+        });
+        
+        slopeBtn.addEventListener('click', () => {
+            if (!earnedBadges.slopeSensei) {
+                earnedBadges.slopeSensei = true;
+                badgeSlope.classList.add('earned');
+                badgeSlopeName.classList.add('earned');
+                slopeBtn.classList.add('earned');
+                showNotification('Slope Sensei', 'You\'ve mastered the slope! Your yard is perfectly graded.');
+            }
+        });
+        
+        planBtn.addEventListener('click', () => {
+            if (!earnedBadges.planMaster) {
+                earnedBadges.planMaster = true;
+                badgePlan.classList.add('earned');
+                badgePlanName.classList.add('earned');
+                planBtn.classList.add('earned');
+                showNotification('Plan Master', 'You\'ve created your leveling plan!');
+            }
+        });
+        
         // Motivational quotes
         const motivationalQuotes = [
-            "The secret of getting ahead is getting started. - Mark Twain",
-            "It does not matter how slowly you go as long as you do not stop. - Confucius",
+            "Every expert was once a beginner. Every pro was once an amateur. Every icon was once an unknown.",
+            "The secret of getting ahead is getting started. The secret of getting started is breaking your complex overwhelming tasks into small manageable tasks.",
+            "You don't have to see the whole staircase, just take the first step.",
+            "It does not matter how slowly you go as long as you do not stop.",
+            "The difference between ordinary and extraordinary is that little 'extra'.",
             "Your limitation—it's only your imagination.",
+            "Push yourself, because no one else is going to do it for you.",
             "Great things never come from comfort zones.",
             "Dream it. Wish it. Do it.",
-            "Success doesn't just find you. You have to go out and get it.",
-            "The harder you work for something, the greater you'll feel when you achieve it.",
-            "Don't stop when you're tired. Stop when you're done.",
-            "Wake up with determination. Go to bed with satisfaction.",
-            "Do something today that your future self will thank you for."
+            "Success doesn't just find you. You have to go out and get it."
         ];
         
-        // Motivational popup functionality
+        // Motivation button functionality
         const motivationBtn = document.getElementById('motivationBtn');
         const motivationPopup = document.getElementById('motivationPopup');
         const motivationText = document.getElementById('motivationText');
@@ -1056,6 +1676,7 @@
             motivationPopup.classList.add('hidden');
         });
         
+        // Close motivation popup when clicking outside
         motivationPopup.addEventListener('click', (e) => {
             if (e.target === motivationPopup) {
                 motivationPopup.classList.add('hidden');
@@ -1064,6 +1685,435 @@
         
         // Initialize progress on page load
         updateProgress();
+        
+        // Game JavaScript
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const scoreElement = document.getElementById('score');
+        const highScoreElement = document.getElementById('highScore');
+        const finalScoreElement = document.getElementById('finalScore');
+        const gameOverScreen = document.getElementById('gameOverScreen');
+        const startScreen = document.getElementById('startScreen');
+        const startButton = document.getElementById('startButton');
+        const restartButton = document.getElementById('restartButton');
+        
+        // Game state
+        let gameRunning = false;
+        let score = 0;
+        let highScore = localStorage.getItem('bunnyHopperHighScore') || 0;
+        let gameSpeed = 2; // Reduced initial speed
+        let gravity = 0.25; // Significantly reduced gravity for slower drops
+        let jumpStrength = -5; // Further reduced jump strength for shorter jumps
+        let gapSize = 220; // Increased initial gap size
+        let minGapSize = 160; // Increased minimum gap size
+        let difficultyIncreaseRate = 0.0005; // Reduced difficulty increase rate
+        
+        // Update high score display
+        highScoreElement.textContent = `High Score: ${highScore}`;
+        
+        // Bunny object
+        const bunny = {
+            x: 150,
+            y: canvas.height / 2,
+            width: 50,
+            height: 50,
+            velocity: 0,
+            jump: function() {
+                this.velocity = jumpStrength;
+            },
+            draw: function() {
+                // Draw fluffy tail
+                ctx.fillStyle = 'white';
+                ctx.beginPath();
+                ctx.arc(this.x - 25, this.y + 10, 15, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Draw bunny body (more rounded)
+                ctx.fillStyle = 'white';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.width / 2, this.height / 2, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Draw bunny ears (more rounded with inner ear details)
+                ctx.fillStyle = 'white';
+                ctx.beginPath();
+                ctx.ellipse(this.x - 15, this.y - 25, 10, 25, -0.2, 0, Math.PI * 2);
+                ctx.ellipse(this.x + 15, this.y - 25, 10, 25, 0.2, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Draw inner ears
+                ctx.fillStyle = '#FFB6C1';
+                ctx.beginPath();
+                ctx.ellipse(this.x - 15, this.y - 20, 6, 15, -0.2, 0, Math.PI * 2);
+                ctx.ellipse(this.x + 15, this.y - 20, 6, 15, 0.2, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Draw bunny eyes (cuter with eyelashes)
+                ctx.fillStyle = 'black';
+                ctx.beginPath();
+                ctx.arc(this.x - 10, this.y - 5, 5, 0, Math.PI * 2);
+                ctx.arc(this.x + 10, this.y - 5, 5, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Draw eyelashes
+                ctx.strokeStyle = 'black';
+                ctx.lineWidth = 1.5;
+                ctx.beginPath();
+                // Left eye lashes
+                ctx.moveTo(this.x - 15, this.y - 8);
+                ctx.lineTo(this.x - 18, this.y - 12);
+                ctx.moveTo(this.x - 15, this.y - 5);
+                ctx.lineTo(this.x - 18, this.y - 5);
+                ctx.moveTo(this.x - 15, this.y - 2);
+                ctx.lineTo(this.x - 18, this.y + 2);
+                // Right eye lashes
+                ctx.moveTo(this.x + 15, this.y - 8);
+                ctx.lineTo(this.x + 18, this.y - 12);
+                ctx.moveTo(this.x + 15, this.y - 5);
+                ctx.lineTo(this.x + 18, this.y - 5);
+                ctx.moveTo(this.x + 15, this.y - 2);
+                ctx.lineTo(this.x + 18, this.y + 2);
+                ctx.stroke();
+                
+                // Draw bunny nose (cuter)
+                ctx.fillStyle = '#FF69B4';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y + 5, 5, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Draw bunny mouth (cuter)
+                ctx.strokeStyle = 'black';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y + 12, 6, 0, Math.PI);
+                ctx.stroke();
+                
+                // Draw whiskers
+                ctx.strokeStyle = 'black';
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                // Left whiskers
+                ctx.moveTo(this.x - 20, this.y + 5);
+                ctx.lineTo(this.x - 40, this.y + 3);
+                ctx.moveTo(this.x - 20, this.y + 10);
+                ctx.lineTo(this.x - 40, this.y + 10);
+                ctx.moveTo(this.x - 20, this.y + 15);
+                ctx.lineTo(this.x - 40, this.y + 17);
+                // Right whiskers
+                ctx.moveTo(this.x + 20, this.y + 5);
+                ctx.lineTo(this.x + 40, this.y + 3);
+                ctx.moveTo(this.x + 20, this.y + 10);
+                ctx.lineTo(this.x + 40, this.y + 10);
+                ctx.moveTo(this.x + 20, this.y + 15);
+                ctx.lineTo(this.x + 40, this.y + 17);
+                ctx.stroke();
+                
+                // Draw blush
+                ctx.fillStyle = 'rgba(255, 192, 203, 0.5)';
+                ctx.beginPath();
+                ctx.arc(this.x - 20, this.y + 8, 8, 0, Math.PI * 2);
+                ctx.arc(this.x + 20, this.y + 8, 8, 0, Math.PI * 2);
+                ctx.fill();
+            },
+            update: function() {
+                this.velocity += gravity;
+                this.y += this.velocity;
+                
+                // Ground collision
+                if (this.y + this.height / 2 > canvas.height - 50) {
+                    this.y = canvas.height - 50 - this.height / 2;
+                    this.velocity = 0;
+                    gameOver();
+                }
+                
+                // Ceiling collision
+                if (this.y - this.height / 2 < 0) {
+                    this.y = this.height / 2;
+                    this.velocity = 0;
+                }
+            }
+        };
+        
+        // Carrot obstacles
+        class Carrot {
+            constructor() {
+                this.x = canvas.width;
+                this.width = 60;
+                this.gapPosition = Math.random() * (canvas.height - gapSize - 100) + 50;
+                this.passed = false;
+            }
+            
+            draw() {
+                // Draw top carrot (more carrot-shaped)
+                ctx.fillStyle = '#FF6347';
+                ctx.beginPath();
+                ctx.moveTo(this.x, this.gapPosition);
+                ctx.lineTo(this.x + this.width, this.gapPosition - 30);
+                ctx.lineTo(this.x + this.width, this.gapPosition);
+                ctx.closePath();
+                ctx.fill();
+                
+                // Add texture lines to carrot
+                ctx.strokeStyle = '#E55100';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.moveTo(this.x + 10, this.gapPosition - 10);
+                ctx.lineTo(this.x + 10, this.gapPosition);
+                ctx.moveTo(this.x + 25, this.gapPosition - 15);
+                ctx.lineTo(this.x + 25, this.gapPosition);
+                ctx.moveTo(this.x + 40, this.gapPosition - 20);
+                ctx.lineTo(this.x + 40, this.gapPosition);
+                ctx.stroke();
+                
+                // Draw carrot top (leaf-like)
+                ctx.fillStyle = '#4CAF50';
+                ctx.beginPath();
+                ctx.moveTo(this.x - 10, this.gapPosition);
+                ctx.lineTo(this.x + 10, this.gapPosition - 40);
+                ctx.lineTo(this.x + 30, this.gapPosition - 30);
+                ctx.lineTo(this.x + 20, this.gapPosition);
+                ctx.closePath();
+                ctx.fill();
+                
+                // Draw bottom carrot (more carrot-shaped)
+                ctx.fillStyle = '#FF6347';
+                ctx.beginPath();
+                ctx.moveTo(this.x, this.gapPosition + gapSize);
+                ctx.lineTo(this.x + this.width, this.gapPosition + gapSize + 30);
+                ctx.lineTo(this.x + this.width, this.gapPosition + gapSize);
+                ctx.closePath();
+                ctx.fill();
+                
+                // Add texture lines to carrot
+                ctx.strokeStyle = '#E55100';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.moveTo(this.x + 10, this.gapPosition + gapSize + 10);
+                ctx.lineTo(this.x + 10, this.gapPosition + gapSize);
+                ctx.moveTo(this.x + 25, this.gapPosition + gapSize + 15);
+                ctx.lineTo(this.x + 25, this.gapPosition + gapSize);
+                ctx.moveTo(this.x + 40, this.gapPosition + gapSize + 20);
+                ctx.lineTo(this.x + 40, this.gapPosition + gapSize);
+                ctx.stroke();
+                
+                // Draw carrot bottom (leaf-like)
+                ctx.fillStyle = '#4CAF50';
+                ctx.beginPath();
+                ctx.moveTo(this.x - 10, this.gapPosition + gapSize);
+                ctx.lineTo(this.x + 10, this.gapPosition + gapSize + 40);
+                ctx.lineTo(this.x + 30, this.gapPosition + gapSize + 30);
+                ctx.lineTo(this.x + 20, this.gapPosition + gapSize);
+                ctx.closePath();
+                ctx.fill();
+            }
+            
+            update() {
+                this.x -= gameSpeed;
+                
+                // Check if bunny passed the carrot
+                if (!this.passed && this.x + this.width < bunny.x) {
+                    this.passed = true;
+                    score++;
+                    scoreElement.textContent = `Score: ${score}`;
+                    
+                    // Increase difficulty
+                    gameSpeed += difficultyIncreaseRate;
+                    if (gapSize > minGapSize) {
+                        gapSize -= difficultyIncreaseRate * 10;
+                    }
+                }
+            }
+            
+            collidesWith(bunny) {
+                // Check collision with top carrot
+                if (bunny.x + bunny.width / 2 > this.x && 
+                    bunny.x - bunny.width / 2 < this.x + this.width &&
+                    bunny.y - bunny.height / 2 < this.gapPosition) {
+                    return true;
+                }
+                
+                // Check collision with bottom carrot
+                if (bunny.x + bunny.width / 2 > this.x && 
+                    bunny.x - bunny.width / 2 < this.x + this.width &&
+                    bunny.y + bunny.height / 2 > this.gapPosition + gapSize) {
+                    return true;
+                }
+                
+                return false;
+            }
+        }
+        
+        // Game objects array
+        let carrots = [];
+        let frameCount = 0;
+        
+        // Draw ground
+        function drawGround() {
+            ctx.fillStyle = '#8BC34A';
+            ctx.fillRect(0, canvas.height - 50, canvas.width, 50);
+            
+            // Draw grass blades
+            ctx.fillStyle = '#689F38';
+            for (let i = 0; i < canvas.width; i += 15) {
+                ctx.beginPath();
+                ctx.moveTo(i, canvas.height - 50);
+                ctx.lineTo(i + 5, canvas.height - 60);
+                ctx.lineTo(i + 10, canvas.height - 50);
+                ctx.fill();
+            }
+            
+            // Draw some flowers on the ground
+            ctx.fillStyle = '#FF4081';
+            for (let i = 50; i < canvas.width; i += 100) {
+                ctx.beginPath();
+                ctx.arc(i, canvas.height - 40, 5, 0, Math.PI * 2);
+                ctx.fill();
+                
+                ctx.fillStyle = '#FFEB3B';
+                ctx.beginPath();
+                ctx.arc(i, canvas.height - 40, 2, 0, Math.PI * 2);
+                ctx.fill();
+                
+                ctx.fillStyle = '#FF4081';
+            }
+        }
+        
+        // Draw clouds
+        function drawClouds() {
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+            
+            // Cloud 1
+            ctx.beginPath();
+            ctx.arc(100, 80, 20, 0, Math.PI * 2);
+            ctx.arc(130, 70, 25, 0, Math.PI * 2);
+            ctx.arc(160, 80, 20, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Cloud 2
+            ctx.beginPath();
+            ctx.arc(400, 120, 20, 0, Math.PI * 2);
+            ctx.arc(430, 110, 25, 0, Math.PI * 2);
+            ctx.arc(460, 120, 20, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Cloud 3
+            ctx.beginPath();
+            ctx.arc(700, 60, 20, 0, Math.PI * 2);
+            ctx.arc(730, 50, 25, 0, Math.PI * 2);
+            ctx.arc(760, 60, 20, 0, Math.PI * 2);
+            ctx.fill();
+        }
+        
+        // Game loop
+        function gameLoop() {
+            if (!gameRunning) return;
+            
+            // Clear canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw background elements
+            drawClouds();
+            drawGround();
+            
+            // Update and draw bunny
+            bunny.update();
+            bunny.draw();
+            
+            // Generate new carrots
+            frameCount++;
+            if (frameCount % 120 === 0) { // Increased interval between carrots
+                carrots.push(new Carrot());
+            }
+            
+            // Update and draw carrots
+            for (let i = carrots.length - 1; i >= 0; i--) {
+                carrots[i].update();
+                carrots[i].draw();
+                
+                // Check collision
+                if (carrots[i].collidesWith(bunny)) {
+                    gameOver();
+                }
+                
+                // Remove off-screen carrots
+                if (carrots[i].x + carrots[i].width < 0) {
+                    carrots.splice(i, 1);
+                }
+            }
+            
+            requestAnimationFrame(gameLoop);
+        }
+        
+        // Game over function
+        function gameOver() {
+            gameRunning = false;
+            
+            // Update high score
+            if (score > highScore) {
+                highScore = score;
+                localStorage.setItem('bunnyHopperHighScore', highScore);
+                highScoreElement.textContent = `High Score: ${highScore}`;
+            }
+            
+            // Show game over screen
+            finalScoreElement.textContent = `Your Score: ${score}`;
+            gameOverScreen.classList.add('show');
+        }
+        
+        // Start game function
+        function startGame() {
+            // Reset game state
+            gameRunning = true;
+            score = 0;
+            gameSpeed = 2;
+            gapSize = 220;
+            carrots = [];
+            frameCount = 0;
+            bunny.y = canvas.height / 2;
+            bunny.velocity = 0;
+            
+            // Update UI
+            scoreElement.textContent = `Score: ${score}`;
+            startScreen.classList.add('hide');
+            gameOverScreen.classList.remove('show');
+            
+            // Start game loop
+            gameLoop();
+        }
+        
+        // Event listeners
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'Space') {
+                if (!gameRunning) {
+                    if (gameOverScreen.classList.contains('show')) {
+                        startGame();
+                    }
+                } else {
+                    bunny.jump();
+                }
+            }
+        });
+        
+        canvas.addEventListener('click', () => {
+            if (gameRunning) {
+                bunny.jump();
+            }
+        });
+        
+        canvas.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            if (gameRunning) {
+                bunny.jump();
+            }
+        });
+        
+        startButton.addEventListener('click', startGame);
+        restartButton.addEventListener('click', startGame);
+        
+        // Initial game setup
+        drawClouds();
+        drawGround();
+        bunny.draw();
     </script>
 </body>
-</html>
+</html>+
